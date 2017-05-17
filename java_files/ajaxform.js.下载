@@ -1,0 +1,270 @@
+var writeForm = (function () {
+    var columns = [];
+    var tpl = function (s, o) {
+        return s.replace(/\$?\{([a-zA-z0-9]*)\}/ig, function ($1, $2) {
+            return o[$2];
+        });
+    };
+
+    var initColumns = function (cfg) {
+        for (var v in cfg) {
+            if (cfg.hasOwnProperty(v)) {
+                var clm = cfg[v];
+                clm.name = v.toLowerCase().substring(4);
+                columns[clm.order] = clm;
+            }
+        }
+    };
+    var inputTpl = {
+        input: '<input type="{type}" class="form-{type}" name="{name}" value="{value}" {checked}><label>{label}</label>',
+        textarea: '<textarea class="form-textarea" name="{name}">{value}</textarea>'
+    };
+    var columnHtml = function (clm, data) {
+        var row = ['<div class="form-item" id="item_' + clm.name + '">'];
+        row.push('<label class="form-label">' + clm.label + "：</label>");
+        row.push('<div class="form-element">');
+        switch (clm.type) {
+            case 'input':
+            case 'textarea':
+                row.push(tpl(inputTpl[clm.type], {
+                    name: clm.name,
+                    value: data[clm.name] || clm.def || "",
+                    type: 'text',
+                    label: '',
+                    checked: ''
+                }));
+                break;
+            case 'radio':
+            case 'checkbox':
+                for (var i = 0; i < clm.option.length; i++) {
+                    var opt = clm.option[i], val = opt.value || opt.label || opt;
+                    row.push('<div class="item-option">');
+
+                    row.push(tpl(inputTpl.input, {
+                        name: clm.name,
+                        value: val,
+                        type: clm.type,
+                        label: opt.label || opt.value || opt,
+                        checked: (val == data[clm.name] ? 'checked' : '')
+                    }));
+                    row.push('</div>');
+                }
+                break;
+            case 'select':
+                row.push('<select name="' + clm.name + '">');
+                for (i = 0; i < clm.option.length; i++) {
+                    opt = clm.option[i];
+                    val = ( opt.value || opt.label || opt);
+                    row.push('<option value="' + val + '" ' + (val == data[clm.name] ? 'selected' : '') + '>');
+                    row.push(opt.label || opt.value || opt);
+                    row.push('</option>');
+                }
+                row.push('</select>');
+                break;
+        }
+        if (clm.required) {
+            row.push('<span class="item-required">*</span>');
+        }
+        if (clm.tip) {
+            row.push('<span class="item-tip">' + clm.tip + '</span>');
+        }
+
+
+        row.push('</div><div class="clear"></div></div>');
+        return row.join('');
+    };
+    var blank = function (obj) {
+        return obj == null || (typeof obj == 'string' && obj.length == 0) || ($.isArray(obj) && obj.length == 0);
+    };
+    var exist = function (obj, key) {
+        return typeof obj[key] != 'undefined';
+    };
+    var elementsByName = function (tag, name) {
+        var rtn = [];
+        var eles = document.getElementsByTagName(tag);
+        for (var v = 0; v < eles.length; v++) {
+            if (name == eles[v].getAttribute('name')) {
+                rtn.push(eles[v]);
+            }
+        }
+        return rtn;
+    };
+    var columnValue = function (cfg) {
+        var t = (cfg.type == 'radio' || cfg.type == 'checkbox') && 'input' || cfg.type;
+        var ele = elementsByName(t, cfg.name);
+        if (blank(ele))
+            return null;
+        switch (cfg.type) {
+            case 'input':
+            case 'textarea':
+                return ele[0].value;
+            case 'select':
+                return ele[0].options[ele[0].selectedIndex].index;
+            case 'radio':
+                for (var i = 0; i < ele.length; i++) {
+                    if (ele[i].checked)
+                        return ele[i].value;
+                }
+                break;
+            case 'checkbox':
+                var vals = [];
+                for (var i = 0; i < ele.length; i++) {
+                    if (ele[i].checked)
+                        vals.push(ele[i].value);
+                }
+                return vals;
+        }
+
+    };
+
+    var markError = function (cfg, msg) {
+        $('#item_' + cfg.name).addClass('form-item-error');
+        var id = 'item_' + cfg.name + "_err";
+        var errObj = $("#" + id);
+        var errWrapper;
+        if (!errObj.length) {
+            errWrapper = $('<div class="form-error"><div class="form-error-right"><div class="form-error-msg" id="' + id + '"></div></div></div>').appendTo(document.body);
+            errObj = $("#" + id);
+            var t = (cfg.type == 'radio' || cfg.type == 'checkbox') && 'input' || cfg.type;
+            var inputObj = $(t + '[name="' + cfg.name + '"]:last');
+
+            errWrapper.css({top: inputObj.offset().top - 7, left: inputObj.offset().left + inputObj.outerWidth() + 80});
+        } else {
+            errWrapper = errObj.parent().parent();
+        }
+        errObj.html(msg);
+        errWrapper.show();
+        return errObj;
+    };
+    var clearError = function (cfg) {
+        $('#item_' + cfg.name).removeClass('form-item-error');
+
+        var errorObj = $('#item_' + cfg.name + "_err");
+        errorObj.parent().parent().hide();
+
+    };
+    var defRule = {
+        name: {regexp: /^.{2,20}$/, msg: '需要多余2个字，少于20个字'},
+        phone: {regexp: /^(0[1-9]{2,3})?[1-9]\d{5,7}(-\d+)?$/, msg: '需符合&nbsp;区号-电话号码-分机&nbsp;格式'},
+        mobile: {regexp: /^1\d{10}$/, msg: '需输入正确的手机号码'},
+        phoneOrMobile: {
+            regexp: /^(0[1-9]{2,3})?[1-9]\d{5,7}(-\d+)$|^1\d{10}$/,
+            msg: '需输入正确的手机号码或者符合&nbsp;区号-电话号码-分机&nbsp;格式的固定电话号码'
+        },
+        email: {regexp: /^([a-zA-Z0-9._-])+@([a-zA-Z0-9._-])+((\.[a-zA-Z0-9_-]{2,3}){1,2})$/, msg: '需输入正确的邮件地址'},
+        qq: {regexp: /^[1-9]\d{4,}$/, msg: '需输入正确的ＱＱ号码'},
+        number: {regexp: /^\-?(0|[1-9]\d*)$/, msg: '需输入正确的整数'},
+        ascii: {regexp: /^[a-zA-z_]*$/, msg: '只可包含字母a-zA-z_'},
+        numberOrAscii: {regexp: /^[a-zA-z0-9_]*$/, msg: '只可包含字母a-zA-z0-9_'},
+        idCard: {
+            regexp: /^[1-9]\d{7}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}$|^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{4}$/,
+            msg: '请输入合法的身份证号码'
+        }
+    };
+    var checkColumn = function (cfg) {
+        clearError(cfg);
+        var val = columnValue(cfg);
+        if (cfg.required && blank(val)) {
+            markError(cfg, cfg.label + '为必填项，不能为空！');
+            return 1;
+        }
+        if (!blank(val) && (cfg.type == 'input' || cfg.type == 'textarea')) {
+            if (cfg.minLen && val.length < cfg.minLen) {
+                markError(cfg, cfg.label + '的长度不能小于' + cfg.minLen + '个字符');
+                return 1;
+            }
+            if (cfg.maxLen && val.length > cfg.maxLen) {
+                markError(cfg, cfg.label + '的长度不能大于' + cfg.maxLen + '个字符');
+                return 1;
+            }
+            if (exist(cfg, 'min') || exist(cfg, 'max')) {
+                var num = +val;
+                if (num != val) {
+                    markError(cfg, cfg.label + '必须为数字');
+                    return 1;
+                }
+                if (exist(cfg, 'min') && num < cfg.min) {
+                    markError(cfg, cfg.label + '的不能小于' + cfg.min);
+                    return 1;
+                }
+                if (exist(cfg, 'max') && num > cfg.max) {
+                    markError(cfg, cfg.label + '的不能大于' + cfg.max);
+                    return 1;
+                }
+            }
+            if (cfg.rule && cfg.rule != 'none') {
+                var reg = null, msg = null;
+                if (cfg.rule == 'customize' && !blank(cfg.regexp)) {
+                    reg = new RegExp(cfg.regexp);
+                    msg = '不符合规则';
+                } else if (defRule[cfg.rule]) {
+                    reg = defRule[cfg.rule].regexp;
+                    msg = defRule[cfg.rule].msg;
+                }
+                if (reg) {
+                    if (!reg.test(val)) {
+                        markError(cfg, cfg.label + msg);
+                        return 1;
+                    }
+                }
+            }
+
+        }
+        return 0;
+    };
+    window.submitData = function () {
+        var error = 0;
+        for (var i = 0; i < columns.length; i++) {
+            var clm = columns[i];
+            if (!clm || !clm.visible) continue;
+
+            error += checkColumn(clm);
+        }
+        if (error == 0) {
+            document.forms[0].submit();
+        }
+    };
+    window.refreshFormCode = function () {
+        var img = $('#formCodeImg');
+        if (img.length > 0)
+            img.attr('src', 'check?w=' + img.width() + '&h=' + img.height() + '&_t=' + (+new Date()));
+
+    };
+    return function (cfg, data, showCode,error) {
+        initColumns(cfg);
+        var html = [];
+        var names = [];
+        for (var i = 0; i < columns.length; i++) {
+            var clm = columns[i];
+            if (!clm || !clm.visible) continue;
+
+            html.push(columnHtml(clm, data || {}));
+            names.push(clm.name);
+        }
+        if (showCode) {
+            html.push('<div class="form-item" id="item_code"><label class="form-label">验证码：</label>' +
+                '<div class="form-element"><input type="text" name="code" style="width: 100px">' +
+                '<img id="formCodeImg" style="width:60px;height:20px;cursor:pointer;vertical-align: middle;margin-left:10px"></div></div>')
+        }
+        html.push('<div class="form-item" id="submitItem"><div class="form-element">' +
+            '<a href="#" class="btn-submit" onclick="submitData();return false;">提交信息</a></div></div>');
+        $('#formRegion').html(html.join(''));
+        refreshFormCode();
+        if (showCode) {
+            $('#formCodeImg').click(function () {
+                refreshFormCode();
+            });
+        }
+        if(error){
+            markError({name:'code',type:'input'},'错误的验证码');
+        }
+
+        $('.form-item').mouseover(
+            function () {
+                if (this.id != 'submitItem')
+                    $(this).addClass("form-item-over");
+            }).mouseout(function () {
+                $(this).removeClass("form-item-over");
+            })
+    };
+})();

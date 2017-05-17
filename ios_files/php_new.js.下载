@@ -1,0 +1,167 @@
+/**
+
+ * 保留当前url的参数，追加在页面内所有href中
+
+ */
+var s = location.search.substring(1);
+var as = document.getElementsByTagName('a');
+for (var i = 0; i < as.length; i++) {
+    if(as[i].href == 'javascript:;'){
+        continue;
+    }else{
+        as[i].href = as[i].href + (as[i].href.indexOf('?') == -1 ? '?' : '&') + s;
+    }
+}
+/*加入收藏*/
+function addFavorite2() {
+    var url = window.location;
+    var title = document.title;
+    var ua = navigator.userAgent.toLowerCase();
+    if (ua.indexOf("360se") > -1) {
+        alert("由于360浏览器功能限制，请按 Ctrl+D 手动收藏！");
+    }
+    else if (ua.indexOf("msie 8") > -1) {
+        window.external.AddToFavoritesBar(url, title); //IE8
+    }
+    else if (document.all) {
+  try{
+   window.external.addFavorite(url, title);
+  }catch(e){
+   alert('您的浏览器不支持,请按 Ctrl+D 手动收藏!');
+  }
+    }
+    else if (window.sidebar) {
+        window.sidebar.addPanel(title, url, "");
+    }
+    else {
+  alert('您的浏览器不支持,请按 Ctrl+D 手动收藏!');
+    }
+}
+/*class nav*/
+$(function(){
+    $(".nav_right .nav").mouseout(function(){
+
+       $(".nav_right .nav").eq(0).addClass('nav_on').siblings().removeClass('nav_on');
+
+    })
+    $(".nav_right span,.class170109").hover(function(){
+
+       $(".class170109").addClass('on');
+
+       $(".nav_right span").addClass('on');
+
+    },function(){
+
+       $(".class170109").removeClass('on');
+
+       $(".nav_right span").removeClass('on');
+
+       $(".nav_right .nav").eq(0).addClass('nav_on');
+
+    })
+
+    $(".nav_right .nav").each(function(nav_index){
+
+        $(this).mouseover(function(){
+
+            $(this).addClass('nav_on').siblings().removeClass('nav_on');
+
+        })
+
+    })
+
+})
+/*bottom*/
+$(function() {
+
+    var $botBtn, $botLi;
+
+    $botBtn = $(".c_bot_lt_hd").find("a");
+
+    $botLi = $(".c_bot_lt ul").find("li");
+
+    $botBtn.first().addClass("active");
+
+    $botLi.first().show();
+    $botBtn.each(function(index) {
+
+        $(this).mouseover(function() {
+
+            $(this).addClass("active").siblings().removeClass("active");
+
+            $botLi.eq(index).show().siblings().hide();
+        });
+
+    });
+});
+/*table*/
+$(document).ready(function(){
+
+  $("table").each(function(){
+      if($("tr:nth-child(1) td",this).length==8||$("tr:nth-child(1) td",this).length==7){
+                $("tr td:nth-child(5)",this).each(function(){
+                    if($(this).html().length>=6){
+                        $(this).html($(this).html().substr(0,2)+"**"+$(this).html().substr(-3,3))
+                    }
+                })
+                $("tr td:nth-child(1)",this).each(function(){
+                    if($(this).html().length==2){
+                        $(this).html($(this).html().substr(0,1)+"*")
+                    }
+                    if($(this).html().length>2){
+                        $(this).html($(this).html().substr(0,1)+"*"+$(this).html().substr(-1,1))
+                    }
+                })
+     }
+
+  })
+
+});
+/*left*/
+$(function() {
+    $qf_h = $(window).height()
+    var hh=(window.innerHeight-544)/2;
+    //console.log(hh);
+    $(".base_fixed").css({"top":hh+50});
+    $(document).scroll(function() {
+        $scrolltop = $(window).scrollTop();
+        $(".base_fixed").stop().animate({
+            top: $scrolltop + hh
+        });
+        if ($scrolltop > 10) {
+            $(".qf_fix02").fadeIn();
+        } else {
+            $(".qf_fix02").fadeOut();
+        }
+        $(".div").stop().animate({
+            "top": $scrolltop + 300
+        });
+    })
+    $(".qf_fix02").click(function() {
+        $("body,html").animate({
+            scrollTop: 0
+        })
+    })
+})
+//img放大镜
+    $(function(){
+        $(".big17410").each(function(index17410){
+            var x17410=1;
+            $(this).on("click",function(){
+                 var xxx=$("img",this).attr("a")
+                 if(x17410==1){
+                   $(this).css({'cursor':'url(/images/-.ico),auto'});
+                   $("img:nth-child(1)",this).hide();
+
+                   if($("img",this).length==2){$("img:nth-child(2)",this).show()}else{
+                   $(this).append('<img src="/images/big17410/'+xxx+'.jpg" />')};
+                   x17410=2;
+                 }else{
+                   $(this).css({'cursor':'url(/images/+.ico),auto'});
+                   $("img:nth-child(1)",this).show();
+                   $("img:nth-child(2)",this).hide();
+                   x17410=1;
+                 }
+            })
+        })
+    })

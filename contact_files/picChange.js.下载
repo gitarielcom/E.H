@@ -1,0 +1,93 @@
+/*北京校区切换*/
+
+;(function($){
+    var $cSchool,$cBtnA;
+    $cBtnA=$(".cBtn").find("a");
+    $cSchool=$(".cSchool");
+
+    $cBtnA.each(function(index){
+
+        $(this).mouseover(function(){
+           $(this).addClass("cBtnActive").siblings().removeClass("cBtnActive");
+           $cSchool.hide();
+           $cSchool.eq(index).show();
+        });
+    })
+
+})(jQuery);
+
+
+/*北京校区图片切换*/
+;(function($){
+    var Init=function(opt){
+
+        this.defaults={
+            "$oWrap":null,
+            "$picList":null,
+            "$smallBtn":null,
+            "delayTime":2600
+        };
+        this.settings=$.extend({},this.defaults,opt);
+        this.timer=null;
+        this.n=0;
+        this.iLen=this.settings.$picList.length;
+    }
+
+    Init.prototype={
+        picShow:function(){
+            this.setTime();
+            this.btnChange();
+            this.clearTime();
+        },
+        setTime:function(){
+            var that=this;
+            this.settings.$oWrap.timer=setInterval(function(){
+                that.n++;
+                if(that.n==that.iLen) that.n=0;
+                that.base(that.n);
+
+            },that.settings.delayTime);
+        },
+        btnChange:function(){
+            var that=this;
+            that.settings.$smallBtn.each(function(index){
+                $(this).mouseover(function(){
+                    that.n=index;
+                    that.base(index);
+                });
+            });
+        },
+        clearTime:function(){
+            var that=this;
+            that.settings.$smallBtn.hover(function(){
+                clearInterval(that.settings.$oWrap.timer);
+            },function(){
+                that.setTime();
+            });
+        },
+        base:function(n){
+                this.settings.$picList.eq(n).show().siblings().hide();
+                this.settings.$smallBtn.eq(n).addClass("chh_contact_camp_con_rg_a").siblings().removeClass("chh_contact_camp_con_rg_a");
+        }
+
+
+    };
+    $.fn.picChange=function(options){
+        return (new Init(options)).picShow();
+    }
+
+})(jQuery);
+/*宝盛里校区切换*/
+$("#bjPicChange").picChange({
+    "$oWrap":$("#bjPicChange"),
+    "$picList":$("#bjPicChange").find("li"),
+    "$smallBtn":$("#bjPicBtn").find("a"),
+});
+
+/*沙河校区切换*/
+$("#bjPicChange1").picChange({
+    "$oWrap":$("#bjPicChange1"),
+    "$picList":$("#bjPicChange1").find("li"),
+    "$smallBtn":$("#bjPicBtn1").find("a"),
+});
+

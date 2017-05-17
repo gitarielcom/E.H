@@ -1,0 +1,85 @@
+body,h1,h2,h3,h4,h5,p,ul{margin: 0;padding: 0;}
+img{vertical-align: top;border:none;}
+li{list-style: none;vertical-align: top;}
+a{text-decoration:none;outline:none;}
+a:hover{text-decoration:underline;}
+.chh_contact_clear{zoom:1;}
+.chh_contact_clear:after{display: block;content:"";clear:both;}
+body{color:#333;}
+
+
+/*公共部分*/
+.chh_contact_h3_base{font:18px/30px "Microsoft YaHei";position: relative;color:#515151;border-bottom: 1px solid #e8e5e5;background:url(../../page/images/contact/chh_contact_h3_icon.png) no-repeat;padding-left: 28px;}
+.chh_contact_h3_base span{position: absolute;bottom:-2px;left:0;width: 116px;height: 3px;background: #37abf6;}
+.chh_contact_h4_base{font:16px/30px "Microsoft YaHei";background:url(../../page/images/contact/chh_contact_h3_icon.png) no-repeat 0 -255px;padding-left: 14px;}
+.chh_contact_h5_base{font:14px/26px "Microsoft YaHei";margin-left: -5px;}
+/*公共部分结束*/
+
+.chh_contact_con{width: 980px;margin:10px auto 0;}
+.chh_contact_lt{width: 720px;float: left;border: 1px solid #ccc;padding-bottom: 45px;}
+.chh_contact_lt_tp{height: 43px;border-bottom: 12px solid #dddbdb;position: relative;background: -moz-linear-gradient(top,#fffafa,#eff9fb);background:-webkit-gradient(top,bottom,color-stop(0,#fffafa),color-stop(1,#eff9fb));-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#fffafa', endColorstr='#eff9fb',GradientType='0')";filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fffafa', endColorstr='#eff9fb', GradientType='0');}
+.chh_contact_lt_tp h2{font-weight: normal;font:14px/40px "Microsoft YaHei";padding-left: 17px;}
+.chh_contact_lt_tp h2 a{color:#333;}
+.chh_contact_lt_tp span{display: block;width: 54px;height: 12px;position: absolute;bottom:-12px;left:-1px;background: #f78600;}
+
+/*公司介绍*/
+.chh_contact_pro{padding:25px 0 0 19px;}
+.chh_contact_pro h3{background-position: 0 4px;}
+.chh_contact_pro_con{padding: 15px 25px 22px 0;}
+.chh_contact_pro_con img{float: left;}
+.chh_contact_pro_con p{float: right;width: 408px;text-indent:2em;line-height: 22px;padding-top: 10px;}
+
+/*合作专线*/
+.chh_contact_coop{padding: 0 0 20px 19px;}
+.chh_contact_coop h3{background-position: 0 -30px;}
+.chh_contact_coop_div{padding-top: 11px;}
+.chh_contact_coop li{float: left;background:url(../../page/images/contact/chh_contact_h3_icon.png) no-repeat;width: 315px;line-height: 24px;padding: 6px 0 6px 35px;}
+.chh_contact_coop .chh_contact_coop_li1{background-position: 0 -99px;}
+.chh_contact_coop .chh_contact_coop_li2{background-position: 0 -139px;}
+.chh_contact_coop .chh_contact_coop_li3{background-position: 0 -179px;}
+
+/*校区分布*/
+.chh_contact_camp{padding: 0 0 0 19px;}
+.chh_contact_camp h3{background-position: 0 -65px;}
+.chh_contact_camp h4{margin-top: 10px;}
+.chh_contact_camp_con{width: 662px;border: 1px solid #ccc;padding: 6px 10px 22px 10px;}
+.chh_contact_camp_con1{height: 450px;padding:6px 10px 0 10px;margin-top: -10px;}
+.chh_contact_camp_con_lt{float: left;}
+.chh_contact_span1{letter-spacing: 8px;}
+.chh_contact_span2{letter-spacing: 48px;}
+.chh_contact_span3{letter-spacing:3px;}
+.chh_contact_camp_con_rg{float: right;margin-top: 4px;position: relative;}
+.chh_contact_camp_con_rg_con{width: 222px;height: 145px;position: relative;overflow: hidden;border-radius: 5px;}
+.chh_contact_camp_con_rg_con ul{position: absolute;left:0;top:0;}
+.chh_contact_camp_con_rg_con li{float: left;overflow: hidden;width: 222px;height: 145px;}
+
+
+
+.chh_contact_busline{margin-top: 5px;}
+.chh_contact_busline p{padding-bottom: 4px;}
+.chh_contact_busline span{font-weight: bold;}
+
+.chh_contact_map1{float: left;width: 318px;}
+.chh_contact_map2{float: right;width: 318px;}
+.chh_contact_map2 img{border: 1px solid #d1d1d1;}
+.chh_contact_map1 .chh_contact_h5_base,.chh_contact_map2 .chh_contact_h5_base{margin-bottom: 4px;}
+
+.chh_contact_btn a{display: inline-block;height: 20px;position: relative;background: #ddd;text-align: center;font-size: 12px;line-height: 20px;color:#000;margin-right: 8px;padding:0 5px;margin-bottom:10px;}
+.chh_contact_btn a:hover{text-decoration: none;}
+.chh_contact_btn span{position: absolute;left:50%;bottom:-10px;border-width: 5px;border-style:solid;border-color:#ddd transparent transparent transparent;margin-left: -5px;}
+.chh_contact_btn .chh_contact_btn_hover{background: #f60;color:#fff;}
+.chh_contact_btn_hover span{border-top-color: #f60;}
+.chh_contact_btn{margin: 4px 0 12px;}
+.chh_contact_other_con{border: 1px solid #ccc;width: 682px;}
+
+.chh_contact_line{padding-top: 8px;}
+.chh_contact_other_pic{width: 222px;height: 135px;position: relative;overflow: hidden;border-radius: 5px;}
+.chh_contact_other_pic ul{position: absolute;left:0;top:0;}
+.chh_contact_other_pic li{float: left;}
+.chh_contact_camp_con_rg_btn,.chh_contact_other_pic_btn{position: absolute;width: 100%;bottom:0;left:0;text-align: center;}
+.chh_contact_camp_con_rg_btn a,.chh_contact_other_pic_btn a{width: 10px;height: 10px;display: inline-block;overflow: hidden;background: #2876bf;border-radius:10px;margin:0 2px;}
+.chh_contact_camp_con_rg_btn .chh_contact_camp_con_rg_a,.chh_contact_other_pic_btn .chh_contact_other_pic_active{background: #ffa200;}
+.chh_contact_map2_p{margin-top:-4px;}
+.chh_contact_line .chh_contact_map2{width: 325px;}
+.chh_contact_line .chh_contact_map2 p{padding-bottom: 4px;}
+.chh_contact_map2_p span{font-weight: bold;}

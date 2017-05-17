@@ -1,0 +1,48 @@
+﻿
+$(".sDBoard .sD .close").click(function(){$(".sDBoard").css({'display':'none'});})
+
+$(".videos .slideBox .contentList li").click(function(){
+	
+	var subject = $(this).find(".desc1").html();
+	console.log("subjectDetail.php?sub="+subject);
+	$.get("subjectDetail.php?sub="+subject,function(data,status){
+		//console.log(data);
+		var jsonData = JSON.parse(data);
+		 //change board header
+		 $(".sDBoard .sD .header").html(jsonData.name+'教学实训大纲');
+		 //create views & append
+		 $(".sDBoard .sD .list").html(createListContent(jsonData));
+		 //list slideToggle
+		 $(".sDBoard .sD .list .weekHeader .sld").click(function(){
+		 	
+		 	$(this).html($(this).html()=='-'?'+':'-');
+		 	//$(this).parent().data('week');
+		 	$('.sDBoard .sD .list .week'+$(this).parent().data('week')).slideToggle();
+		 })
+		 //show sDBoard
+		$(".sDBoard").css({'display':'block'});
+		//add click function
+		$(".sDBoard .sD .list ul li").click(function(){
+			//jump and send value
+			window.location.href = 'videos.html?sub='+subject;
+		})
+	})
+})															
+
+function createListContent(videoData){
+	var htmlStr = '';
+	var videos = videoData.data.namelist;
+	var nowWeek=0;
+	for(var i=0;i<videos.length;i++){
+		if(videos[i].weekid!=nowWeek){
+			if(htmlStr!=''){
+				htmlStr += '</ul>';
+			}
+			htmlStr += '<div class="weekHeader" data-week = "'+videos[i].weekid+'"><span class="ornament"></span>第'+videos[i].weekid+'周课程内容<span class="sld">-</span></div><ul class="week'+videos[i].weekid+'">';
+			nowWeek=videos[i].weekid;
+		}
+		htmlStr += '<li><span class="id">'+videos[i].id+'</span><span class="content">'+videos[i].title+'</span><span class="time">'+videos[i].time+'min</span></li>'
+	}
+	return htmlStr;
+}
+

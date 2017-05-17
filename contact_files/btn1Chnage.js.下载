@@ -1,0 +1,15 @@
+$(function(){
+
+    var boxTab=$(".boxTab"),
+        tabBtnA=$(".tabBtn").find("a");
+
+    tabBtnA.each(function(index){
+
+        $(this).click(function(){
+
+            boxTab.eq(index).css("display","block").siblings().css("display","none");
+            $(this).addClass('active').siblings().removeClass('active');
+        });
+
+    });
+});

@@ -1,0 +1,105 @@
+
+if(window.addEventListener){
+
+    window.addEventListener('DOMContentLoaded',Load1,false);
+}else{
+
+    bind(window,'load',Load1);
+}
+
+function Load1(){
+
+    var chh_show_bg=document.getElementById('chh_show_bg');
+    var chh_oMask=document.getElementById('chh_mask');
+    var chh_v_close=document.getElementById('chh_v_close');
+    var chh_v_btn=getByClass('chh_v_btn',document);
+
+    var chh_iH=Math.max(view().h,scrollH(),offsetH());
+    chh_oMask.style.height=chh_iH+'px';
+
+    for(var i=0;i<chh_v_btn.length;i++){
+
+        chh_v_btn[i].index=i;
+        chh_v_btn[i].onclick=function(){
+
+            chh_toShow();
+        }
+    }
+
+    function chh_toShow(){
+
+        chh_oMask.style.display="block";
+        chh_show_bg.style.display="block";
+
+    }
+
+    chh_v_close.onclick=function(){
+
+        chh_oMask.style.display="none";
+        chh_show_bg.style.display="none";
+    };
+}
+
+
+
+function bind(obj,ev,fn){
+
+    if(obj.addEventListener){
+
+        obj.addEventListener(ev,fn,false);
+    }else{
+
+        obj.attachEvent('on'+ev,function(){
+
+            fn.call(obj);
+        })
+    }
+}
+
+function getByClass(sClass,parent){
+
+    if( document.getElementsByClassName ){
+
+        return  (parent||document).getElementsByClassName(sClass);
+
+    }
+
+    var aEles = (parent||document).getElementsByTagName('*');
+    var arr = [];
+
+    for(var i=0; i<aEles.length; i++){
+
+        var aClass = aEles[i].className.split(' ');
+
+        for(var j=0; j<aClass.length; j++){
+
+            if( aClass[j] == sClass ){
+
+                arr.push( aEles[i] );
+                break;
+            }
+        }
+    }
+    return arr;
+}
+
+function view(){
+	return {
+		w : document.documentElement.clientWidth,
+		h : document.documentElement.clientHeight
+	}
+}
+
+function scrollH(){
+	return document.body.scrollHeight;
+}
+
+function offsetH(){
+	return document.body.offsetHeight;
+}
+
+function scrollY(){
+
+	return document.body.scrollTop || document.documentElement.scrollTop;
+
+}

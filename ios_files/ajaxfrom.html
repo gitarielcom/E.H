@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<!-- saved from url=(0062)http://www.mobiletrain.org/page/ajaxfrom/ajaxfrom.php?type=ios -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    
+
+    <title></title>
+
+    <link href="./ajaxformData.css" rel="stylesheet">
+
+    <script type="text/javascript" src="./jquery-1.4.2.min.js.下载"></script>
+
+    <script type="text/javascript" src="./ajaxform.js.下载"></script>
+
+    <script type="text/javascript">
+
+
+
+        var config = {
+
+            propName:{label:"姓名",visible:1,required:1,type:"input",solid:1,order:1,rule:"name"},
+
+            propGender:{label:"性别",visible:0,required:1,type:"radio",option:[{label:"男",value:1},{label:"女",value:2}],solid:1,order:4},
+
+            propPhone:{label:"固定电话",visible:0,required:0,type:"input",rule:"phone",solid:1,order:5},
+
+            propMobile:{label:"手机",visible:1,required:1,type:"input",rule:"mobile",solid:1,order:2},
+
+            propQq:{label:"Q&nbsp;Q",visible:1,required:1,type:"input",rule:"qq",solid:1,order:6},
+
+            propMsn:{label:"MSN",visible:0,required:0,type:"input",rule:"email",solid:1,order:7},
+
+            propEmail:{label:"邮箱",visible:0,required:1,type:"input",rule:"email",solid:1,order:3},
+
+            propColumn0:{label:"自定义字段一",visible:0,required:0,order:8},
+
+            propColumn1:{label:"自定义字段二",visible:0,required:0,order:9},
+
+            propColumn2:{label:"自定义字段三",visible:0,required:0,order:10},
+
+            propColumn3:{label:"自定义字段四",visible:0,required:0,order:11},
+
+            propColumn4:{label:"自定义字段五",visible:0,required:0,order:12},
+
+            propColumn5:{label:"自定义字段六",visible:0,required:0,order:13},
+
+            propColumn6:{label:"自定义字段七",visible:0,required:0,order:14},
+
+            propColumn7:{label:"自定义字段八",visible:0,required:0,order:15},
+
+            propColumn8:{label:"自定义字段九",visible:0,required:0,order:16},
+
+            propColumn9:{label:"自定义字段十",visible:0,required:0,order:17}
+
+        };
+
+        var data = null;
+
+
+
+
+
+        window.onload = function () {
+
+            writeForm(config, data, false, '');
+
+        }
+
+    </script>
+
+</head>
+
+<body>
+
+<div class="wrapper ">
+
+    <form action="http://www.mobiletrain.org/page/ajaxfrom/ajaxfrom.php?type=ios" method="post" target="_blank">
+
+        <input type="hidden" name="redirect" value="">
+
+        <input type="hidden" name="pos" value="">
+
+        <input type="hidden" name="page" value="">
+
+
+
+        <div id="formRegion"><div class="form-item" id="item_name"><label class="form-label">姓名：</label><div class="form-element"><input type="text" class="form-text" name="name" value=""><label></label><span class="item-required">*</span></div><div class="clear"></div></div><div class="form-item" id="item_mobile"><label class="form-label">手机：</label><div class="form-element"><input type="text" class="form-text" name="mobile" value=""><label></label><span class="item-required">*</span></div><div class="clear"></div></div><div class="form-item" id="item_qq"><label class="form-label">Q&nbsp;Q：</label><div class="form-element"><input type="text" class="form-text" name="qq" value=""><label></label><span class="item-required">*</span></div><div class="clear"></div></div><div class="form-item" id="submitItem"><div class="form-element"><a href="http://www.mobiletrain.org/page/ajaxfrom/ajaxfrom.php?type=ios#" class="btn-submit" onclick="submitData();return false;">提交信息</a></div></div></div>
+
+    </form>
+
+</div>
+
+
+    <!--1、代码从此行开始，往下到/body之前，都是访客注册的扩展配置里面，下面对代码各行做详细的解析-->
+
+
+
+    <!--2、替换注册默认的按钮连接，此文档的黄色按钮就是替换后的效果-->
+
+    <div style="margin-left: 64px; margin-top: 15px;"><!--替换按钮的位置设定-->
+
+        <a onclick="trData();" class="freeSubmit" style="cursor: pointer;"><img src="./qfan2.png"></a>
+
+    </div>
+
+
+
+    <!--3、对注册样式的控制-->
+
+    <style type="text/css">
+
+
+
+        body {
+
+
+
+            height: 284px;
+
+            width: 422px;
+
+            border:0px solid #09986D;
+
+        }
+
+        /* 3.1 给注册添加背景图，并给定背景的宽高，即图片的宽高，并指定边框，后期可以把边框调成0px，颜色给定背景边框的颜色，这一步主要是为了兼容 */
+
+
+
+
+
+        #formRegion{margin:41px 0 0 0;}/* 3.2给定姓名等字段的指定位置 */
+
+        .form-item-over{background:none !important;} /* 3.3消除默认注册点击输入框的背景效果 */
+
+        .form-error-msg{display:none !important;}/* 3.4 隐藏默认的验证提醒的文字信息*/
+
+        .form-error{display:none !important;}/* 3.5隐藏默认的验证提醒*/
+
+        .item-required{display:none !important;}/* 3.6 隐藏验证的红色*号 */
+
+        .btn-submit{display:none !important;}/* 3.7 隐藏默认的按钮 */
+
+
+
+
+
+        .form-text {
+
+            height: 35px;
+
+            line-height: 20px;
+
+            text-indent: 4px;
+
+            width: 250px;
+
+            margin-bottom:5px;
+
+            font-family: "微软雅黑";
+
+        }/* 3.8 设置输入框的大小，颜色等信息 */
+
+
+
+
+
+        .form-label{ font-size: 21px;width:65px;color:#ededed;font-family: "Microsoft YaHei";}/* 3.9姓名等字体的文字信息 */
+
+        .form-element {
+
+            margin-left: 60px;
+
+            position: relative;
+
+        }/* 3.10输入框位置显示的样式信息*/
+
+
+
+
+
+
+
+    </style>
+
+    <!-- 4，验证脚本，我们建议只验证姓名和手机，其他的验证，根据需要去添加，那样下面这个脚本就要相应修改-->
+
+
+
+
+<script>
+
+    function trData(){
+
+        var name=document.getElementsByName("name")[0].value;
+
+        var mobile=document.getElementsByName("mobile")[0].value;
+
+        var qq=document.getElementsByName("qq")[0].value;
+
+        check_name=/[\u4E00-\u9FA5]{2,5}(?:·[\u4E00-\u9FA5]{2,5})*/;
+
+        check_mobile=/^(((1[0-9][0-9]{1}))+\d{8})$/;
+
+        check_qq =  /^[1-9]\d{4,13}$/;
+
+        if(!name){ alert("对不起，姓名选项不能为空!");return false;}
+
+        if(!mobile){ alert("对不起，手机选项不能为空!");return false;}
+
+        if(!qq){ alert("对不起,QQ不能为空!");return false;}
+
+        if(!(check_name.test(name))){
+
+            alert("请您输入正确的姓名");
+
+            return false;
+
+        }
+
+        if(!(check_mobile.test(mobile)))
+
+        {
+
+            alert("请您输入正确的手机号");
+
+            return false;
+
+        }
+
+
+
+        if(!(check_qq.test(qq))){
+
+            alert("请您输入正确的QQ");
+
+            return false;
+
+        }
+
+        sourcepage=window.parent.document.referrer;
+
+        Accesspage=window.parent.location.href;
+
+        $.ajax(
+
+                {
+
+                    type:'get',
+
+                    url : 'http://zs.1000phone.net/public/ajaxSourceInfo',
+
+                    data:{name:name,qq:qq,phone:mobile,Accesspage:Accesspage,sourcepage:sourcepage},
+
+                    dataType : 'jsonp',
+
+                    jsonp:"jsoncallback",
+
+                    success  : function(data) {
+
+
+
+                        alert(data.msg);
+
+                    },
+
+                    error : function() {
+
+                        alert('fail');
+
+                    }
+
+                }
+
+        );
+
+    }
+
+</script>
+
+
+
+</body></html>

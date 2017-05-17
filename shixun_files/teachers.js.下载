@@ -1,0 +1,40 @@
+
+$(".teachers .detail").click(function(){
+	
+	$(this).css({'display':'none'});
+})
+
+$(".teachers .slideBox .contentList li").click(function(){
+	// $.get("getData.php?type=getTeacher&name="+$(this).find(".desc1").html(),function(data,status){
+		
+	// });
+	$('.teachers .detail .introduce .skill').remove();
+	$('.teachers .detail .imageBox .image').attr('src',allData.teachers[$(this).index()].imageSrc);
+	$('.teachers .detail .introduce .TName').html(allData.teachers[$(this).index()].name);
+	$('.teachers .detail .introduce .TIntro1').html(allData.teachers[$(this).index()].post);
+	$('.teachers .detail .introduce .TIntro2').html(allData.teachers[$(this).index()].intro2);
+	var skills = cutSkill(allData.teachers[$(this).index()].skill,',');
+	for(var i=0;i<skills.length;i++){
+		var $ski = $('<div class="skill">'+skills[i]+'</div>');
+		$('.teachers .detail .introduce').append($ski);
+	}
+	//console.log($(this).find(".desc1").html())
+	$(".teachers .detail").css({'display':'block'});
+})
+
+function cutSkill(str,c) {
+	var now=0;
+	var skills = [];console.log(str)
+	for(var i=0;i<str.length;i++){
+		if(str[i]==c){
+			var newStr = str.slice(now,i);
+			now=i+1;
+			skills.push(newStr);
+		}
+		if(i==str.length-1){
+			var newStr = str.slice(now,i+1);
+			skills.push(newStr);
+		}
+	}
+	return skills;
+}

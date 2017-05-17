@@ -1,0 +1,48 @@
+
+//请求数据 创建
+$.get('getData.php?type=getAll', function(data, status) {
+	//console.log(data)
+	allData = JSON.parse(data);
+	//allData = jQuery.parseJSON(data)
+	//console.log(data)
+	//轮播数据
+	imageScroll();
+	//视频
+	videos();
+	//教室
+	teachers();
+})
+
+function imageScroll(){
+	/*
+	<li class="item">
+		<img src="img/1.jpg" />
+	</li>
+	*/
+	var $sliceList = $(".sliceBox .sliceList");
+	for(var i = 0; i < allData.imageScroll.length; i++) {
+		var $li = $("<li class='item'><img src=" + allData.imageScroll[i].imageSrc + " /></li>")
+		$sliceList.append($li);
+	}
+	createPoint();
+	createBtn();
+	autoChange();
+}
+
+function videos(){
+	for(var i=0;i<allData.videos.length;i++){
+		$(".videos .slideBox .contentList li").eq(i).find('.img').css({'background':'url('+allData.videos[i].imageSrc+')no-repeat center center'});
+		$(".videos .slideBox .contentList li").eq(i).find('.desc1').html(allData.videos[i].subject);
+		$(".videos .slideBox .contentList li").eq(i).find('.desc2').html(allData.videos[i].introduction);
+		$(".videos .slideBox .contentList li").eq(i).find('.desc3').html(allData.videos[i].playCount);
+	}
+}
+
+function teachers(){
+	for(var i=0;i<allData.teachers.length;i++){
+		$(".teachers .slideBox .contentList li").eq(i).find('.img').css({'background':'url('+allData.teachers[i].imageSrc+')no-repeat center center'});
+		$(".teachers .slideBox .contentList li").eq(i).find('.desc1').html(allData.teachers[i].name);
+		$(".teachers .slideBox .contentList li").eq(i).find('.desc2').html(allData.teachers[i].intro1);
+		// $(".teachers .slideBox .contentList sli").eq(i).find('.desc3').html(allData.teachers[i].intro2);
+	}
+}

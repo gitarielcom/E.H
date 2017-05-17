@@ -1,0 +1,10 @@
+
+
+
+$(".slideBox .contentList li").on("mouseenter",function(e){
+//	console.log($(this).parent().siblings().find('.slideBar'));
+//	console.log($(this).parent().find('li').size());
+    //var count = $(this).parent().find('li').size()>6?6:$(this).parent().find('li').size();
+	// var width = 1200/count;
+	$(this).parent().siblings().find('.slideBar').animate({'left':this.offsetLeft+'px'},100,'linear');
+})

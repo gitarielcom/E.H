@@ -1,0 +1,773 @@
+
+
+if(window.addEventListener){
+
+    window.addEventListener("DOMContentLoaded",contact_Load,false);
+
+}else{
+
+    bind(window,'load',contact_Load);
+
+}
+
+
+
+function contact_Load(){
+
+
+
+//图片切换js
+
+    var contact_other_pic=document.getElementById('chh_contact_other_pic');
+    var contact_other_pic_ul=document.getElementById('chh_contact_other_pic_ul');
+    var contact_other_pic_btn=document.getElementById('chh_contact_other_pic_btn');
+    var contact_other_pic_btnA=contact_other_pic_btn.getElementsByTagName('a');
+    var contact_other_pic_li=contact_other_pic_ul.getElementsByTagName('li');
+    var contact_Lw=contact_other_pic_li[0].offsetHeight;
+    var contact_num=contact_other_pic_li.length;
+    var contact_n=0;
+    contact_other_pic_ul.style.width=contact_Lw*contact_num+'px';                                               //获取ul的宽度
+    contact_onMv();
+    function contact_onMv(){
+        contact_other_pic.timer=setInterval(function(){
+            contact_MvR();
+        },2000);
+    }
+    contact_other_pic_btn.onmouseover=contact_other_pic_ul.onmouseover=function(){
+        clearInterval(contact_other_pic.timer);
+    };
+    contact_other_pic_btn.onmouseout=contact_other_pic_ul.onmouseout=function(){
+        contact_onMv();
+    };
+    for(var i=0;i<contact_num;i++){
+        contact_other_pic_btnA[i].index=i;
+        contact_other_pic_btnA[i].onmouseover=function(){
+            contact_n=this.index;
+            if(contact_n==0){
+                contact_other_pic_li[0].style.top=0;
+            }
+            if(contact_n==contact_num-1){
+                contact_other_pic_li[contact_num-1].style.top=0;
+            }
+            contact_Mv();
+        };
+    }
+    function contact_MvR(){
+          if(contact_n>=0){
+                contact_other_pic_li[contact_num-1].style.top=0;
+            }
+            contact_n++;
+            if(contact_n==contact_num){
+                contact_other_pic_li[0].style.top=contact_num*contact_Lw+'px';
+            }
+            if(contact_n==contact_num+1){
+                contact_other_pic_li[0].style.top=0;
+                contact_other_pic_ul.style.top=0;
+                contact_n=1;
+            }
+            contact_Mv();
+    }
+    function contact_Mv(){
+        for(var i=0;i<contact_num;i++){
+            contact_other_pic_btnA[i].className="";
+        }
+        contact_other_pic_btnA[(contact_n+contact_num)%contact_num].className="chh_contact_other_pic_active";
+        doMove(contact_other_pic_ul,{
+            top:-contact_Lw*contact_n
+        },400,'linear');
+    }
+
+
+//图片切换js结束
+
+//内容切换js
+
+ var chh_contact_btn=document.getElementById('chh_contact_btn');
+
+ var chh_contact_btnA=chh_contact_btn.getElementsByTagName('a');
+
+ var contact_camp_con_lt=document.getElementById('chh_contact_camp_con_lt');
+
+ var contact_other_pic=document.getElementById('chh_contact_other_pic');
+
+ var contact_other_img=contact_other_pic.getElementsByTagName('img');
+
+var chh_contact_map=document.getElementById('chh_contact_map');
+
+var contact_map2_p=document.getElementById('chh_contact_map2_p');
+
+
+
+ var contact_arr=[
+
+            { //深圳大学城
+
+
+
+                dz  :     '<span class="chh_contact_span1">校区地</span>址：深圳市南山区留仙大道1201号大学城创客小镇16栋2楼、3楼<br>培训咨询专线：0755-86660670-801<br>招聘咨询专线：0755-33582485-801<br><span class="chh_contact_span2">邮</span>编：518000<br><span class="chh_contact_span2">地</span>铁：大学城地铁站-C出口<br><span class="chh_contact_span1">附近公</span>交：19路, 43路, 49路, n8路, 36路, 74路, 81路, 122路<br><span class="chh_contact_span3">附近公交</span>站：留仙大道中, 红花岭, 珠光北路, 丽山路南, 西丽劳力市场站<br>',
+
+
+
+                        tp :      [
+
+
+
+                                        'http://www.mobiletrain.org/page/images/contact/chh_contact_szdxc1.jpg',
+
+                                        'http://www.mobiletrain.org/page/images/contact/chh_contact_szdxc2.jpg',
+
+                                        'http://www.mobiletrain.org/page/images/contact/chh_contact_szdxc3.jpg'
+
+
+
+                                    ],
+
+
+
+                        dt :    'chh_contact_dxc_map',
+
+
+
+                        lx :    '<p><span>A：</span>乘19路、43路、49路、n8路到珠光北路下车。</p><p><span>B：</span>乘36路、74路、81路、122路、b736路、m217路、m299路、m343路、m369路、m385路、m393路、m459路、高峰专线94到西丽劳力市场下车。</p><p><span>C：</span>乘36路、43路、49路、74路、81路。122路、b736路、m217路、m299路、m343路、m369路、m385路、m393路、m459路、高峰专线94路到红花岭下车。</p><p><span>D：</span>乘36路、43路、49路、43路、b736路、m369路到丽山路南下车。</p>',
+
+
+
+                        alt : '深圳大学城校区'
+
+            },{ //深圳西部硅谷校区
+
+
+
+                dz:'<span class="chh_contact_span1">校区地</span>址：深圳市宝安区宝安大道5010号深圳西部硅谷A区B座605-619<br>招聘咨询专线：0755-33582485-801<br><span class="chh_contact_span2">邮</span>编：518101<br><span class="chh_contact_span3">附近地铁</span>站：罗宝线后瑞地铁站A口直行100米<br><span class="chh_contact_span1">附近公</span>交：338路、615路、b804路、b827路、m249路、m284路、<br>m419路、m433路、高峰专线105路、高峰专线30路<br><span class="chh_contact_span3">附近公交</span>站：后瑞地铁站、空港物流<br>',
+
+
+
+                        tp :      [
+
+
+
+                                        'http://www.mobiletrain.org/page/images/contact/chh_contact_szdxc1.jpg',
+
+                                        'http://www.mobiletrain.org/page/images/contact/chh_contact_szdxc2.jpg',
+
+                                        'http://www.mobiletrain.org/page/images/contact/chh_contact_szdxc3.jpg'
+
+
+
+                                    ],
+
+
+
+                        dt :    'chh_contact_xbgg_map',
+
+
+
+                        lx :    '<p><span>深圳火车站</span>乘1号线(罗湖站上车，后瑞A口下车），A口出，下车向东南470米。</p><p><span>深圳西站：</span>乘1号线（大新上，后瑞A口出），下车向东南470米。</p><p><span>深圳北站：</span>乘5号线(深圳北站上,宝安中心下,10站)，换1号线(后瑞A口出,5站)，下车向东南470米。</p><p><span>宝安机场：</span>机场5线(机场新航站楼上,保税物流中心下,3站)，下车向东710米。</p>',
+
+
+
+                        alt : '深圳西部硅谷校区'
+
+            },
+
+
+
+                { //上海
+
+
+
+                    dz : '<span class="chh_contact_span1">校区地</span>址：上海市宝山区同济支路199号智慧七立方3号楼2-4层<br>培训咨询专线：021-56166283/56166279 021-65233829-801<br>招聘咨询专线：021-65233829-801<br><span class="chh_contact_span2">邮</span>编：200940<br><span class="chh_contact_span2">地</span>铁：三号线水产路站2号口出<br><span class="chh_contact_span1">附近公</span>交：51路；13路；952B路<br><span class="chh_contact_span3">附近公交</span>站：同济支路水产路站、同济支路泰和路站<br>',
+
+
+
+                        tp :     [
+
+
+
+                                        'http://www.mobiletrain.org/page/images/contact/chh_contact_shanghai1.jpg',
+
+                                        'http://www.mobiletrain.org/page/images/contact/chh_contact_shanghai2.jpg',
+
+                                        'http://www.mobiletrain.org/page/images/contact/chh_contact_shanghai3.jpg'
+
+
+
+                                    ],
+
+
+
+                        dt :    'chh_contact_shanghai_map',
+
+
+
+                        lx :    '<p><span>上海火车站：</span>乘坐地铁3号线（江杨北路方向），在水产路2号口出，步行至同济支路。</p><p><span>上海虹桥火车站：</span>乘坐地铁10号线（新江湾城方向），在虹桥路站下车，换乘地铁3号线（江杨北路方向），在水产路站下车2号口出，步行至同济支路。</p><p><span>上海南站：</span>乘坐地铁3号线（江杨北路方向），在水产路站下车，地铁2号口直接步行至同济支路。</p>',
+
+
+
+                        alt : '上海校区'
+
+            },
+
+
+
+            { //广州
+
+
+
+                dz  :     '<span class="chh_contact_span1">校区地</span>址：广州市天河区元岗路310号智汇park创意园E栋501<br/>培训咨询专线：020-22119207 400-654-7778<br/>招聘咨询专线：020-22119207<br/><span class="chh_contact_span2">邮</span>编：510650<br/> <span class="chh_contact_span2">地</span>铁：三号线、六号线天河客运站D口出<br/><span class="chh_contact_span1">附近公</span>交：126、83、884、高峰快线48、791、884、夜90、498、B11<br/><span class="chh_contact_span3">附近公交</span>站：元岗村、元岗横路中、元岗路、天河客运站、上元岗<br/>',
+
+
+
+                        tp :      [
+
+
+
+                                        'http://www.mobiletrain.org/page/images/contact/chh_contact_guangzhou1.jpg',
+
+                                        'http://www.mobiletrain.org/page/images/contact/chh_contact_guangzhou2.jpg',
+
+                                        'http://www.mobiletrain.org/page/images/contact/chh_contact_guangzhou3.jpg'
+
+
+
+                                    ],
+
+
+
+                        dt :    'chh_contact_guangzhou_map',
+
+
+
+                        lx :    '<p><span>广州火车站：</span>打车费用约39元（按驾车最短路程计算）乘坐地铁5号线(文冲方向),在区庄站下车，站内换乘地铁6号线(长湴方向)，乘坐地铁6号线(长湴方向),在天河客运站下车(D口出)，步行500米至智汇Park创意园。</p><p><span>广州火车东站：</span>打车费用19元（按驾车的最短路程计算）乘坐地铁3号线北延段(体育西路方向),在燕塘站下车，站内换乘地铁6号线(长湴方向)，乘坐地铁6号线(长湴方向),在天河客运站下车(D口出)，步行500米至智汇Park创意园。</p><p> <span>广州火车南站：</span>打车费用97元（按驾车的最短路程计算）乘坐地铁2号线(嘉禾望岗方向),在海珠广场站下车，站内换乘地铁6号线(长湴方向)，乘坐地铁6号线(长湴方向),在天河客运站下车(D口出)，步行500米至智汇Park创意园。</p>',
+
+
+
+                        alt : '广州校区'
+
+            },
+
+            { //郑州
+
+
+
+                dz  :     '<span class="chh_contact_span1">校区地</span>址：郑州市金水区经六路与纬五路交叉口向东<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;河南教育学院（老校区）综合楼6/7层<br>培训咨询专线：0371-55191750 400-654-7778<br>招聘咨询专线：0371-55911937<br><span class="chh_contact_span2">邮</span>编：450000<br><span class="chh_contact_span2">地</span>铁：紫荆山站/人民路站<br><span class="chh_contact_span1">附近公</span>交：21，28，B50，B37,64,258,71，32，47<br><span class="chh_contact_span3">附近公交</span>站：河南教育学院站/经六路纬五路站/经五路纬五路站<br>',
+
+
+
+                        tp :      [
+
+
+
+                                        'http://www.mobiletrain.org/page/images/contact/chh_contact_zhenzhou1.jpg',
+
+                                        'http://www.mobiletrain.org/page/images/contact/chh_contact_zhenzhou2.jpg',
+
+                                        'http://www.mobiletrain.org/page/images/contact/chh_contact_zhenzhou3.jpg'
+
+
+
+                                    ],
+
+
+
+                        dt :    'chh_contact_zhenzhou_map',
+
+
+
+                        lx :    '<p><span>郑州火车站：</span>打车费用约13元（按驾车的最短路程计算）；乘坐21路至河南教育学院站（11站）下车；乘坐32路至经七路纬三路站（6站）下车。</p><p><span>郑州东站：</span>打车费用约22元（按驾车的最短路程计算）；乘坐47路至花园路黄河路站（18站）下车。</p><p><span>郑州客运北站：</span>打车费用约11元（按驾车的最短路程计算）； 乘坐63路至黄河路服装市场站（8站）下车；步行至花园路鑫苑路站，乘坐32至黄河路服装市场站（6站）下车。</p><p><span>郑州长途客运总站：</span>打车费用约19元（按驾车的最短路程计算）；乘坐962至花园路口站（13站）下车；乘坐62至花园路口站（13站）下车；乘坐603/906至人民公园东门站（8站）下车，转乘21至河南教育学院站（7站）下车。</p>',
+
+
+
+                        alt : '郑州校区'
+
+            },
+
+
+
+            { //大连
+
+
+
+                dz  :     '<span class="chh_contact_span1">校区地</span>址：大连学院地址：大连市甘井子区软件园路6号B5座101室<br>咨询电话：0411-39026086 400-654-7778<br>面授课程：iOS课程培训、Android课程培训、HTML5课程培训<br>',
+
+
+
+                        tp :      [
+
+
+
+                                        'http://www.mobiletrain.org/page/images/contact/chh_contact_dalian1.jpg',
+
+                                        'http://www.mobiletrain.org/page/images/contact/chh_contact_dalian2.jpg',
+
+                                        'http://www.mobiletrain.org/page/images/contact/chh_contact_dalian3.jpg'
+
+
+
+                                    ],
+
+
+
+                        dt :    'chh_contact_dalian_map',
+
+
+
+                        lx :    '<p><span>大连火车站：</span>步行至友好广场站，乘坐901路公交车，在东软信息学院站下车即可。</p><p><span>大连火车站：</span>步行至友好广场站，乘408路（或7路，201路，909路），在五一广场下车，步行至五一广场站，乘坐26路在大工路下车，步行至东软信息学院即可。</p><p><span>大连火车站：</span>乘坐地铁1号线（富锦路方向），在人民场站下车，站内换乘地铁8号线（市光路方向），在江浦路站下车，1号口出，沿江浦路周家嘴路方向步行至双辽支路，直行即到</p><p><span>大连火车站：</span>步行至站北广场站，乘坐站北广场-旅顺（或站北广场-旅顺横山寺加车）, 在东北财经大学站下车，步行至东北财经大学站，乘坐 3路, 在东软信息学院下车即可。</p>',
+
+
+
+                        alt : '大连校区'
+
+            },
+
+
+
+            { //武汉
+
+
+
+
+
+                dz  :     '<span class="chh_contact_span1">校区地</span>址：武汉市江夏区藏龙岛杨桥湖大道15号拓创大厦15楼<br>培训咨询专线：027-81772047<br>招聘咨询专线：027-59905910<br><span class="chh_contact_span2">邮</span>编：430070<br><span class="chh_contact_span1">附近公</span>交：718，758路<br><span class="chh_contact_span3">附近公交</span>站：杨桥湖大道程杨湾<br>',
+
+
+
+                        tp :      [
+
+
+
+                                        'http://www.mobiletrain.org/page/images/contact/chh_contact_wuhan1.jpg',
+
+                                        'http://www.mobiletrain.org/page/images/contact/chh_contact_wuhan2.jpg',
+
+                                        'http://www.mobiletrain.org/page/images/contact/chh_contact_wuhan3.jpg'
+
+
+
+                                    ],
+
+
+
+                        dt :    'chh_contact_wuhan_map',
+
+
+
+                        lx :    '<p><span>武汉火车站：</span>乘坐地铁4号线（黄金口方向）在中南路站转2号线（光谷广场方向）在光谷广场站下车C口出，乘公交718或758，在杨桥湖大道程杨湾站下车即到。</p><p><span>武昌火车站：</span>乘坐地铁4号线（武汉火车站方向）在中南路站转2号线（光谷广场方向）在光谷广场站下车C口出，乘公交718或758，在杨桥湖大道程杨湾站下车即到。</p><p><span>汉口火车站：</span>乘坐地铁2号线（光谷广场方向）在光谷广场站下车C口出，乘公交718或758，在杨桥湖大道程杨湾站下车即到。</p>',
+
+
+
+                        alt : '武汉校区'
+
+            },
+
+            { //成都
+
+
+
+                dz  :     '<span class="chh_contact_span1">校区地</span>址：成都市一环路西二段17号四川旅游学院青羊校区内<br>培训咨询专线：028-83178771<br>招聘咨询专线：028-61967740<br><span class="chh_contact_span2">邮</span>编：610000<br><span class="chh_contact_span2">地</span>铁：地铁2号线（中医大省医院站）<br><span class="chh_contact_span1">附近公</span>交：11路, 27a路, 27路, 42路, 58路, 59路, 129路, 1031路<br><span class="chh_contact_span3">附近公交</span>站：省医院-公交车站<br>',
+
+
+
+                        tp :      [
+
+
+
+                                        'http://www.mobiletrain.org/page/images/contact/chh_contact_chengdou1.jpg',
+
+                                        'http://www.mobiletrain.org/page/images/contact/chh_contact_chengdou2.jpg',
+
+                                        'http://www.mobiletrain.org/page/images/contact/chh_contact_chengdou3.jpg'
+
+
+
+                                    ],
+
+
+
+                        dt :    'chh_contact_chendou_map',
+
+
+
+                        lx :    '<p><span>五桂桥公交站：</span>乘坐58路, 在省医院站下车。12站。打车费用: 28元 (按驾车的最短路程计算)</p><p><span>新南门汽车站：</span>220米步行至 致民路西站6站乘坐 35路, 在 青羊宫站 下车560米步行至 旅游学院。打车费用: 16元 (按驾车的最短路程计算)</p><p><span>成都火车北站：</span>乘坐地铁1号线(世纪城方向), 在 天府广场站下车 ，3站转乘坐 地铁2号线(犀浦方向), 在中医大省医院站下车(A口出) 打车费用: 17元 (按驾车的最短路程计算）。</p><p><span>成都火车南站：</span>乘坐地铁1号线(升仙湖方向), 在天府广场站下车 3站转乘坐地铁2号线(犀浦方向), 在中医大省医院站下车(A口出) 打车费用: 25元 (按驾车的最短路程计算)。</p><p><span>成都东站：</span>地铁2号线(犀浦方向), 在中医大省医院站下车(A口出）打车费用: 34元 (按驾车的最短路程计算)</p>',
+
+
+
+                        alt : '成都校区'
+
+            },
+
+            { //西安
+
+
+
+                dz  :     '<span class="chh_contact_span1">校区地</span>址：西安市雁塔区高新六路52号立人科技C座西区4楼<br>培训咨询专线：029-85260160 85260960<br>招聘咨询专线：029-85261030<br><span class="chh_contact_span2">邮</span>编：710000<br><span class="chh_contact_span2">地</span>铁：地铁三号线（丈八北路站）<br><span class="chh_contact_span1">附近公</span>交：34路;107路;512路608路;225路;251路;725路;902路<br><span class="chh_contact_span3">附近公交</span>站：振兴公交广告站、南窑头站<br>',
+
+
+
+                        tp :      [
+
+
+
+                                        'http://www.mobiletrain.org/page/images/contact/chh_contact_xian1.jpg',
+
+                                        'http://www.mobiletrain.org/page/images/contact/chh_contact_xian2.jpg',
+
+                                        'http://www.mobiletrain.org/page/images/contact/chh_contact_xian3.jpg'
+
+
+
+                                    ],
+
+
+
+                        dt :    'chh_contact_xian_map',
+
+
+
+                        lx :    '<p><span>西安火车站：</span>打车费用约34元（按最短）；步行330米到达火车站乘坐251路或608路，在丁家桥站下车向南步行720米到立人科技园。</p><p><span>西安北站：</span>打车约58元；地铁2号线在小寨站换乘地铁3号线、3号线延平门站换乘107路，终点站振兴公交广告下车。</p><p><span>西安汽车站：</span>打车约61元；地铁1号线在通化门站换乘地铁3号线、3号线延平门站换乘107路，终点站振兴公交广告下车。</p>',
+
+
+
+                        alt : '西安校区'
+
+            },
+
+            { //杭州
+
+
+
+                dz  :'<span class="chh_contact_span1">校区地</span>址：浙江省杭州市江干区九堡镇九源路旺田书画城4层千锋教育<br>培训咨询专线：0571-86893632<br>招聘咨询专线：0571-87655662<br><span class="chh_contact_span2">邮</span>编：310000<br><span class="chh_contact_span2">地</span>铁：1号线九堡站C口出<br><span class="chh_contact_span1">附近公</span>交：309路, 100路, 325路, 509路, 339路, 229路, 357路, 358路<br><span class="chh_contact_span3">附近公交</span>站：牛田公交站<br>',
+
+
+
+                        tp :      [
+
+
+
+                                        'http://www.mobiletrain.org/page/images/contact/chh_contact_hangzhou1.jpg',
+
+                                        'http://www.mobiletrain.org/page/images/contact/chh_contact_hangzhou2.jpg',
+
+                                        'http://www.mobiletrain.org/page/images/contact/chh_contact_hangzhou3.jpg'
+
+
+
+                                    ],
+
+
+
+                        dt :    'chh_contact_hangzhou_map',
+
+
+
+                        lx :    '<p><span>萧山机场：</span>乘坐机场大巴到城站火车站，转地铁1号线至九堡站C口出 直行 100米右转100米。</p><p><span>火车东站：</span>乘坐城铁1号线至九堡站下C口出，直行 100米右转100米。</p><p><span>城站火车站：</span>乘坐城铁1号线至九堡站下C口出，直行 100米右转100米。</p><p><span>杭州汽车南站：</span>步行至站前路公交站至客运中心西站下车转地铁转地铁1号线至九堡站C口出 直行 100米右转100米。</p>',
+
+
+
+                        alt : '杭州校区'
+
+            },
+
+            { //青岛
+
+
+
+                dz  :'<span class="chh_contact_span1">校区地</span>址：青岛市市南区金坛路17号青岛职业技术学院内实训楼A座4楼<br>培训咨询专线：0532-80910752/3<br>招聘咨询专线：0532-80910756<br><span class="chh_contact_span2">邮</span>编：266000<br><span class="chh_contact_span2">地</span>铁：无<br><span class="chh_contact_span1">附近公</span>交：318路, 223路, 374路, 322路, 605路, 2路, 302路, 125路<br><span class="chh_contact_span3">附近公交</span>站：江西路站、山东路南站<br>',
+
+
+
+                        tp :      [
+
+
+
+                                        'http://www.mobiletrain.org/page/images/contact/chh_contact_qingdao1.jpg',
+
+                                        'http://www.mobiletrain.org/page/images/contact/chh_contact_qingdao2.jpg',
+
+                                        'http://www.mobiletrain.org/page/images/contact/chh_contact_qingdao3.jpg'
+
+
+
+                                    ],
+
+
+
+                        dt :    'chh_contact_qingdao_map',
+
+
+
+                        lx :    '<p><span>青岛火车站到青岛分校：</span>从青岛火车站 约步行32米到青岛火车站， 乘坐307路经过12站，在金坛路北站下车 ，约步行57米到金坛路北站 ，便到达终点金坛路北站。</p><p><span>青岛流亭机场到青岛分校：</span>步行至流亭国际机场乘坐305专线到汽车北站下车，乘坐605路大站快车 (或 605路, 374路 ) , 在图书馆站下车步行至金坛路17号。</p>',
+
+
+
+                        alt : '青岛校区'
+
+            }
+
+     ];
+
+
+
+
+
+
+
+     for(var i=0;i<chh_contact_btnA.length;i++){
+
+
+
+        chh_contact_btnA[i].index=i;
+
+
+
+        chh_contact_btnA[i].onclick=function(){
+
+
+
+            for(var i=0;i<chh_contact_btnA.length;i++){
+
+
+
+                chh_contact_btnA[i].className="";
+
+                if(chh_contact_btnA[i].children[0]){
+
+
+
+                    chh_contact_btnA[i].removeChild(chh_contact_btnA[i].children[0]);
+
+                }
+
+
+
+            }
+
+            this.className="chh_contact_btn_hover";
+
+            var chh_contact_span=document.createElement('span');
+
+            this.appendChild(chh_contact_span);
+
+
+
+            chh_contact_camp_con_lt.innerHTML=contact_arr[this.index].dz;  //校区地址
+
+            chh_contact_map.innerHTML='<img src="http://www.mobiletrain.org/page/images/contact/'+contact_arr[this.index].dt+'.jpg" height="242" width="318" alt="'+contact_arr[this.index].alt+'">';  //地图切换
+
+            contact_map2_p.innerHTML=contact_arr[this.index].lx;  //乘车路线
+
+
+
+            for(var i=0;i<contact_other_img.length;i++){
+
+                contact_other_img[i].src="";
+
+                contact_other_img[i].src=contact_arr[this.index].tp[i];
+
+                contact_other_img[i].alt=contact_arr[this.index].alt;
+
+            }
+
+
+
+        };
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//内容切换js结束
+
+}
+
+
+
+
+
+
+
+
+
+
+
+function bind(obj,ev,fn){
+
+
+
+    if(obj.addEventListener){
+
+
+
+        obj.addEventListener(ev,fn,false);
+
+    }else{
+
+
+
+        obj.attachEvent('on'+ev,function(){
+
+
+
+            fn.call(obj);
+
+        })
+
+    }
+
+}
+
+
+
+function addClass(obj,sClass){
+
+
+
+    var aClass = obj.className.split(' ');
+
+
+
+    if( !obj.className ){
+
+
+
+        obj.className = sClass;
+
+        return;
+
+
+
+    }
+
+
+
+    for(var i=0; i<aClass.length; i++){
+
+
+
+        if( aClass[i] == sClass )return;
+
+
+
+    }
+
+
+
+    obj.className += ' ' + sClass;
+
+
+
+}
+
+
+
+function removeClass(obj,sClass){
+
+
+
+    var aClass = obj.className.split(' ');
+
+
+
+    if( !obj.className )return;
+
+
+
+    for(var i=0; i<aClass.length; i++){
+
+
+
+        if( aClass[i] == sClass ){
+
+
+
+            aClass.splice(i,1);
+
+            obj.className = aClass.join(' ');
+
+
+
+        }
+
+
+
+    }
+
+
+
+}
+
+
+
+function getByClass(sClass,parent){
+
+
+
+    if( document.getElementsByClassName ){
+
+
+
+        return  (parent||document).getElementsByClassName(sClass);
+
+
+
+    }
+
+
+
+    var aEles = (parent||document).getElementsByTagName('*');
+
+    var arr = [];
+
+
+
+    for(var i=0; i<aEles.length; i++){
+
+
+
+        var aClass = aEles[i].className.split(' ');
+
+
+
+        for(var j=0; j<aClass.length; j++){
+
+
+
+            if( aClass[j] == sClass ){
+
+
+
+                arr.push( aEles[i] );
+
+                break;
+
+
+
+            }
+
+
+
+        }
+
+
+
+    }
+
+
+
+    return arr;
+
+}

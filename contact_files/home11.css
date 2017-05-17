@@ -1,0 +1,68 @@
+
+
+.ckbxx_wrap{width: 979px;border: 1px solid #dadada;margin: 10px auto;}
+.ckbxx_tp{height:36px;background:url(../images/kbxx_top_bg.png) repeat-x;border-bottom:1px solid #dadada;position: relative;line-height: 36px;}
+.ckbxx_tp img{position: absolute;left:0;top:-1px;}
+.ckbxx_con{height:235px;overflow: hidden;padding-left: 28px;}
+.ckbxx_ios li{width:237px;}
+.ckbxx_btn{padding-left: 200px;font-family: "宋体";}
+.ckbxx_btn a{width: 78px;height: 36px;display: inline-block;margin:0 10px;text-align: center;color:#666;font-family: "Microsoft YaHei",微软雅黑,"Microsoft JhengHei",华文细黑,STHeiti,MingLiu;}
+.ckbxx_btn a.active{background:url(../images/kbxx_top_hover.png) no-repeat center 4px;color:#fff;}
+.ckbxx_list{display: none;}
+.ckbxx_list .ckbxx_ios{width: 244px;}
+.ckbxx_ios li{float: left;padding-top: 8px;}
+.ckbxx_ios .ckbxx_li_pd{font-size: 13px;line-height: 18px;margin-top: 6px;height: 18px;vertical-align: middle;width:220px;}
+.kbxx_a11{width:118px;}
+.ckbxx_con li i{display: inline-block;width:15px;height:15px;background:url(../images/kbxx_icon12.png) no-repeat;margin:0 8px 0 0;vertical-align: middle;}
+.ckbxx_con li .sz_icon{background-position: 0 -20px;}
+.ckbxx_con li .sh_icon{background-position: 0 -40px;}
+.ckbxx_con li .zz_icon{background-position: 0 -60px;}
+.ckbxx_con li .gz_icon{background-position: 0 -80px;}
+.ckbxx_con li .dl_icon{background-position: 0 -100px;}
+.ckbxx_con li .wh_icon{background-position: 0 -120px;}
+.ckbxx_con li .cd_icon{background-position: 0 -140px;}
+.ckbxx_con li .xa_icon{background-position: 0 -160px;}
+.ckbxx_con li .hz_icon{background-position: 0 -180px;}
+.ckbxx_con li .qd_icon{background-position: 0 -200px;}
+.ckbxx_con li a{display: inline-block;vertical-align: middle;color:#000;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
+.ckbxx_con li a:hover{text-decoration: underline;}
+.ckbxx_con .ckbxx_data{padding:0 8px;display: inline-block;vertical-align: middle;}
+.ckbxx_con .ckbxx_bm{color:red;}
+.ckbxx_con .ckbxx_qz{color:#1876e0;}
+.ckbxx_con .ckbxx_kb{color:#33CC33;}
+
+.ckbxx_h5{font-size:14px;color:#333;padding:10px 0 5px;}
+.ckbxx_h5_page{float:left;padding:0 17px;font-size:13px;}
+.ckbxx_h5_page h4{border-bottom:1px solid #e1e1e1;line-height:32px;}
+.ckbxx_h5_page1{width:230px;padding-left: 0;}
+.ckbxx_h5_page1 p{line-height:18px;padding-top:10px;color:#aaa;}
+.ckbxx_h5_page1 ul{padding-top:10px;}
+.ckbxx_h5_page1 li{margin:3px 0 0 0;height:21px;}
+.ckbxx_h5_page2{width:305px;border-left:1px solid #e1e1e1;border-right:1px solid #e1e1e1;height:225px;}
+.ckbxx_h5_page2 ul{padding-top: 10px;overflow: hidden;}
+.ckbxx_h5_page2 li{float: left;margin:0 8px;text-align: center;}
+.ckbxx_h5_page2 li span{display: block;line-height: 22px;padding: 4px 0;}
+.ckbxx_h5_page3 b{display: inline-block;width: 59px;color:#000;}
+.ckbxx_h5_page3 span{display: inline-block;width: 125px;}
+.ckbxx_h5_page3 .ckbxx_h5_p1{color:#aaa;line-height: 18px;padding-top: 15px;}
+.ckbxx_h5_page3 .ckbxx_h5_p2{line-height: 30px;padding:15px 0 0 0;}
+.ckbxx_h5_page3{width:325px;}
+
+
+/* 专题回顾 */
+.zthg{height: 280px;border: solid 1px #dcdddd;width: 248px;font-size: 12px;float: right;overflow: hidden;}
+.zthg h3{height: 35px;background: #f3f3f3;border-bottom: 1px solid #dcdddd;color:#333;font-size: 16px;line-height: 35px;padding-left: 24px;font-weight: bold;}
+.zthg_hd a{color:#8c8c8c;float: right;font-size: 12px;line-height: 35px;margin-right:10px;font-family: Arial,Helvetica,sans-serif;font-weight: bold;}
+.zthg_hd a:hover{text-decoration: underline;}
+.zthg_con ul{margin:0 10px;padding-top:10px;}
+.zthg_title{text-indent:8px;background:url(../images/listtype.gif) no-repeat left center;height: 26px;line-height: 26px;color:#404040;width:220px;text-overflow:ellipsis;overflow: hidden;white-space: nowrap;}
+
+.zthg_pic{height: 54px;padding: 4px 0;border-bottom: 1px dotted #ccc;border-top: 1px dotted #ccc;display: none;overflow: hidden;}
+.zthg_pic a{display: block;color:#ff611e;}
+.zthg_pic a:hover{text-decoration: underline;}
+.zthg_pic img,.zthg_pic span{float: left;}
+.zthg_pic span{max-width:148px;padding:0 0 0 6px;height:50px;overflow: hidden;display: block;}
+.ckbxx_tp span{font-size: 16px;color: #ff9415;line-height: 36px;display:inline-block;font-family: "Microsoft YaHei",微软雅黑,"Microsoft JhengHei",华文细黑,STHeiti,MingLiu;}
+
+.zthg_hd span{float: left;}
+

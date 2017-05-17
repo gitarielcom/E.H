@@ -1,0 +1,77 @@
+var changeTimer;
+$(function(){
+
+	// $(".sliceBox").css({'height':$(this).width()*0.45+"px"});
+	
+	// window.onresize = function(){
+	// 	$(".sliceBox").css({'height':$(".sliceBox").width()*0.45+"px"});
+	// }
+})
+
+function createPoint() {
+	count = $(".sliceBox .sliceList .item").size();
+	nowIndex = 0;
+	var $pointBox = $("<div class='points'></div>");
+	$(".sliceBox").append($pointBox);
+	for(var i = 0; i < count; i++) {
+		var $span = $("<span data-index=" + i + "></span>");
+		if(i == 0) {
+			$span.css({
+				'opacity': '1'
+			})
+		};
+		$pointBox.append($span);
+		$span.click(function() {
+			// clearInterval(changeTimer);
+			change($(this).data("index"));
+		});
+	}
+}
+
+function createBtn() {
+	var $next = $("<span class='changebtn next'></span>");
+	$(".sliceBox").append($next);
+	$next.click(function() {
+//		clearInterval(changeTimer);
+		if(++nowIndex >= count) {
+			nowIndex = 0;
+		}
+		change(nowIndex);
+	})
+	var $prev = $("<span class='changebtn prev'></span>");
+	$(".sliceBox").append($prev);
+	$prev.click(function() {
+//		clearInterval(changeTimer);
+		if(--nowIndex < 0) {
+			nowIndex = count - 1;
+		}
+		change(nowIndex);
+	})
+}
+
+function change(index) {
+	$(".sliceBox .points span").eq(index).css({
+		'opacity': '1'
+	}).siblings().css({
+		'opacity': '0.5'
+	});
+	$(".sliceBox .sliceList .item img").fadeOut(500).eq(index).fadeIn(500);
+	nowIndex = index;
+}
+
+function autoChange() {
+	changeTimer = setInterval(function() {
+		if(++nowIndex >= count) {
+			nowIndex = 0;
+		}
+		change(nowIndex);
+	}, 3000)
+	// console.log("111111");
+}
+
+function clearTimer(){
+	// $(".sliceBox .sliceList .item").onmouseover(function(){
+		clearInterval(changeTimer);
+	// })
+	
+}

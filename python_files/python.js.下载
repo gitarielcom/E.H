@@ -1,0 +1,177 @@
+!function(t,e,n,s){"use strict";var o="faceCursor",a={avertCursor:!1,perspective:"25rem",cacheElementData:!0},i=function(e,n){e===s&&(e={});var o=function(){this.destroy=r.destroy,this.init()};t.extend(r,{options:e,$elements:n}),t.extend(o.prototype,r);var a=new o;return a},r={get settings(){return delete this.settings,this.settings=t.extend(!0,{},a,this.options)},destroy:function(){this.$elements.off("."+o)},init:function(){var e=this;this.options.cacheElementData&&this.cacheElementData(),this.animFrameLoop(e),t(n).on("mousemove."+o,function(t){e.lastMouseCoords={x:t.pageX,y:t.pageY}})},lastMouseCoords:null,getElementData:function(e){var n=this;this.$elements.each(function(s,a){n.settings.cacheElementData&&t(a).data("."+o)?e(t(a).data("cachedData."+o),t(a)):e({w:t(a).outerWidth(),h:t(a).outerHeight(),offset:t(a).offset()},t(a))})},cacheElementData:function(){this.getElementData(function(t,e){e.data("cachedData."+o,t)})},animFrameLoop:function(t){e.requestAnimationFrame(function(){t.frame(),t.animFrameLoop(t)})},frame:function(){if(this.lastMouseCoords){var t=this;this.getElementData(function(e,n){var s=t.lastMouseCoords.x-(e.offset.left+e.w/2),o=t.lastMouseCoords.y-(e.offset.top+e.h/2),a=s/(e.w/2),i=o/(e.h/2);n.css("transform","perspective("+t.settings.perspective+")rotate3d("+(i*(t.settings.avertCursor?1:-1)).toFixed(2)+", "+(a*(t.settings.avertCursor?-1:1)).toFixed(2)+", 0, 1deg)")})}}};t.fn[o]=function(e){return this.each(function(){t(this).data("plugin_"+o)&&t(this).data("plugin_pluginName").destroy(),t(this).data("plugin_"+o,i(e,t(this)))})}}(jQuery,window,document);
+/*切换封装*/
+;(function($,window,document,undefined){
+    var Init=function(ele,opt){
+        this.$element=ele;
+        this.defaults={
+            "aBtn":$(".cont1_tb").find("a"),
+            "contentList":$(".con1_tb_content div").find("p"),
+            "activeClass":"on",
+            "mouseActive":"mouseover",
+            "line":false,
+            "lineBox":$("#posLine1"),
+            "delayTime":0,
+            "moveTime":200
+        };
+        this.settings=$.extend({},this.defaults,opt);
+    };
+
+    Init.prototype={
+        tab:function(){
+            var that=this;
+            return  this.settings.aBtn.each(function(index){
+                $(this)[that.settings.mouseActive](function(){
+                    var that2=this;
+                    setTimeout(function(){
+                        if(that.settings.line){
+                            that.settings.lineBox.stop().animate({"left":that.settings.lineBox.outerWidth(true)*index},that.settings.moveTime);
+                        }
+                        that.settings.contentList.eq(index).show().siblings().hide();
+                        $(that2).addClass(that.settings.activeClass).siblings().removeClass(that.settings.activeClass);
+                    },that.settings.delayTime);
+                });
+            });
+        }
+    };
+
+    $.fn.Tab=function(options){
+        var changeTab=new Init(this,options);
+        return changeTab.tab();
+    }
+})(jQuery,window,document);
+$(".con2").Tab();
+$(".con1").Tab({"aBtn":$(".con1_tab_title").find("span"),"contentList":$(".con1_tab_cn").find("li"),"mouseActive":"mouseover","line":true})
+$(".con6").Tab({"aBtn":$(".big_fixed").find("li"),"contentList":$(".python_class").find("div"),"mouseActive":"mouseover","line":true})
+$(".con7").Tab({"aBtn":$(".con7_list").find("li"),"activeClass":"hover","mouseActive":"mouseover","line":true})
+$(".con4_good").Tab({"aBtn":$(".con4_good").find("p"),"activeClass":"hover","mouseActive":"mouseover","line":true})
+// 倒计时
+  function GetRTime(){
+    var EndTime= new Date('2017/05/31 00:00:00');
+    var NowTime = new Date();
+    var t =EndTime.getTime() - NowTime.getTime();
+    var d=0;
+    var h=0;
+    var m=0;
+    var s=0;
+    if(t>=0){
+      d=Math.floor(t/1000/60/60/24);
+      h=Math.floor(t/1000/60/60%24);
+      m=Math.floor(t/1000/60%60);
+      s=Math.floor(t/1000%60);
+    }
+    if(d<10){
+        d = '0'+d;
+    }
+    if(h<10){
+        h = '0'+h;
+    }
+    if(m<10){
+        m = '0'+m;
+    }
+    if(s<10){
+        s = '0'+s;
+    }
+    document.getElementById("t_d").innerHTML = d ;
+    document.getElementById("t_h").innerHTML = h ;
+    document.getElementById("t_m").innerHTML = m ;
+    document.getElementById("t_s").innerHTML = s ;
+  }
+  setInterval(GetRTime,0);
+//师资团队
+$(function(){
+
+    var arr=[
+                {
+                    "num":1,
+                    "description":"<span>尹老师</span><span>Python教学部总监</span><span>毕业于清华大学，专业软件架构师，CSDN著名技术专家，微软-清华大学联合实验室技术顾问，清华大学Oracle-java创始人 ，清华大学Google技术俱乐部创始人 ，清华大学Linux 技术俱乐部创始人。精通Python,C/C++，对于移动3G，语音技术，javaEE,信息安全 ,大数据高并发都有丰富的开发经验。拥有多年IT企业的工作经验。</span>"
+                },
+                {
+                    "num":2,
+                    "description":"<span>刘老师</span><span>Python教学部</span><span>毕业于清华大学，清华大学校友会深度学习俱乐部部长，清华ACM战队成员；曾荣获微软编程之美大赛一等奖，精通Python,C/C++ ,在机器学习，深度学习，算法与数据结构上拥有极高的造诣。就职Google期间，参与Google搜索引擎开发、Google tensorflow与AlphaGo的开发，对于数据挖掘，分布式多线程爬虫，高并发大数据有丰富的实战经验。教学特点：注重思维培养，授课富有激情，擅长理论结合实际、提高学生项目开发实战的能力。</span>"
+                },
+                {
+                    "num":3,
+                    "description":"<span>杨老师</span><span>Python教学部</span><span>毕业于清华大学，全栈技术工程师，有多年IT企业、互联网企业工作经验，主导过社交、资讯、游戏等多类互联网应用的前后端设计开发。精通python，C/C++，Linux，对于大规模高并发web服务、网络爬虫、大数据处理，机器学习，深度学习等有丰富的项目经验。擅长总结归纳，化繁为简，化难为易，教学方法独特，富有激情，擅以理论结合实际、提高学生项目开发实战的能力。</span>"
+                }
+
+            ];
+
+            var $aTeamSmallPic=$(".t_title"),
+                // $a_team_name=$(".a_team_name"),
+                $a_team_cir1_span=$(".con8_teacher").find("p"),
+                $a_team_pic=$(".py_teacher"),
+                arrN=[],
+                t="";
+
+                $.each(arr,function(index){
+                    t+='<a href="javascript:void(0);"><img src="http://www.mobiletrain.org/page/python/img/python/t'+arr[index].num+'.png" height="118" width="118" alt="'+arr[index].name+'"></a>';
+                });
+                $aTeamSmallPic.html(t);    //生成小图片
+
+            var $aTeamSmallPic_a=$aTeamSmallPic.find("a");
+                $aTeamSmallPic_a.eq(0).addClass("aTeamActive");
+
+
+                //初始化内容
+
+                // $a_team_name.html(arr[0].name);    //添加名字
+                $a_team_pic.html('<img src="http://www.mobiletrain.org/page/python/img/python/teacher'+arr[0].num+'.png" height="435" width="330" alt="'+arr[0].name+'">');     //添加乳品
+                $a_team_cir1_span.eq(0).html(arr[0].description);  //添加简介
+                if(arr[0].video){
+                    $a_team_cir1_span.eq(1).html("<i>授课视频：</i>"+arr[0].video);
+                }else{
+                    $a_team_cir1_span.eq(1).html("");
+                }       //添加授课视频
+                arrN[0]=0
+
+
+                $aTeamSmallPic_a.each(function(index){
+
+                    $(this).click(function(){
+
+                        // $a_team_name.html(arr[index].name);    //添加名字
+                        $a_team_pic.html('<img src="http://www.mobiletrain.org/page/python/img/python/teacher'+arr[index].num+'.png" height="435" width="330" alt="'+arr[index].name+'">');     //添加乳品
+                        $a_team_cir1_span.eq(0).html(arr[index].description);  //添加简介
+
+
+                        if(arr[index].video){
+                            $a_team_cir1_span.eq(1).html("<i>授课视频：</i>"+arr[index].video);
+                        }else{
+                            $a_team_cir1_span.eq(1).html("");
+                        }       //添加授课视频
+
+                        $(this).siblings().removeClass("aTeamActive").end().addClass("aTeamActive");   //鼠标点击状态
+                        arrN[0]=index;
+                    });
+
+
+                    // $(this).mouseover(function(){
+                    //     $(this).siblings().removeClass("aTeamActive").end().addClass("aTeamActive");
+                    // });
+
+                    // $aTeamSmallPic.mouseout(function(){
+                    //     $aTeamSmallPic_a.removeClass("aTeamActive");
+                    //     $aTeamSmallPic_a.eq(1).addClass("aTeamActive");
+                    // });
+
+                });
+
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

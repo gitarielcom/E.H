@@ -1,0 +1,268 @@
+
+.videos{
+	width: 100%;
+	height: 365px;
+	position: relative;
+	margin: 0 auto;
+	/*background: #303033;*/
+	background: url(../img/bgm.png)repeat-x;
+	background-size: 1200px;
+	background-position: 0 bottom;
+}
+
+.videoTitle{
+	width: 100%;
+	height: 400px;
+	background: #111828;
+	/*background: url(../img/1118281.jpg)no-repeat center center;*/
+	background-size: 1200px 400px;
+}
+
+.videoTitle img{
+	display: block;
+	margin: 0 auto;
+	width: 1200px;
+	height: 400px;
+}
+/*.videos .title{
+	width: 1200px;
+	height: 400px;
+	margin: 0px auto;
+	background: url(../img/1118281.jpg)no-repeat center center;
+	background-size: 1200px 400px;
+	position: relative;
+	top: 20px;
+}*/
+
+.videos span{
+	width: 100%;
+	display: block;
+	text-align: center;
+	position: absolute;
+	font-family: "微软雅黑";
+}
+
+.videos .text1{
+	color: #FFFFFF;
+	font-size: 36px;
+	top: 30px;
+}
+
+.videos .text2{
+	color: #f15a23;
+	font-size: 50px;
+	top: 80px;
+}
+
+.videos .text3{
+	color: #FFFFFF;
+	font-size: 36px;
+	bottom: 20px;
+}
+
+.videos .descriptions{
+	width: 800px;
+	height: 100px;
+	margin: 0 auto;
+	position: relative;
+	margin-top: 40px;
+}
+
+.videos .descriptions ul{
+	list-style: none;
+	width: 100%;
+	height: 100%;
+	position: relative;
+	text-align: center;
+}
+
+.videos .descriptions ul li{
+	display: inline-block;
+	width: 100px;
+	height: 100px;
+	margin: 0 20px;
+	background: #F15A23;
+	border-radius: 50px;
+	-webkit-border-radius: 50px;
+	-moz-border-radius: 50px;
+	-ms-border-radius: 50px;
+	text-align: center;
+	line-height: 100px;
+	font-size: 36px;
+	color: white;
+}
+
+.videos .slideBox{
+	top: -10px;
+	margin: 0px;
+}
+
+.videos .slideBox .contentList li .img{
+	width: 220px;
+	height: 200px;
+	background-size: 220px 200px !important;
+}
+
+.sDBoard{
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	background: rgba(0,0,0,0.6);
+	top: 0;
+	z-index: 99;
+	display: none;
+}
+
+.sDBoard .sD{
+	width: 800px;
+	height: 600px;
+	background-color: #232323;
+	position: fixed;
+	margin: auto;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	border-radius: 16px;
+	-webkit-border-radius: 16px;
+	-moz-border-radius: 16px;
+	-ms-border-radius: 16px;
+	-o-border-radius: 16px;
+}
+
+.sDBoard .sD .close{
+	display: block;
+	width: 32px;
+	height: 32px;
+	line-height: 25px;
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	background-color: darkgray;
+	border-radius: 16px;
+	-webkit-border-radius: 16px;
+	-moz-border-radius: 16px;
+	-ms-border-radius: 16px;
+	-o-border-radius: 16px;
+	color: lightgray;
+	font-size: 30px;
+}
+
+.sDBoard .sD .header{
+	width: 100%;
+	height: 136px;
+	color: #fff;
+	font-size: 48px;
+	text-align: center;
+	line-height: 136px;
+}
+
+.sDBoard .sD .list{
+	position: absolute;
+	width: 100%;
+	top: 136px;
+	bottom: 0;
+	overflow: scroll;
+}
+
+.sDBoard .sD .list .weekHeader{
+	width: 100%;
+	height: 50px;
+	background-color: #141414;
+	color: #fff;
+	font-size: 24px;
+	text-align: left;
+	line-height: 50px;
+	position: relative;
+	padding-left: 50px;
+	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-ms-box-sizing: border-box;
+	-o-box-sizing: border-box;
+}
+
+.sDBoard .sD .list .weekHeader span.ornament{
+	display: block;
+	height: 100%;
+	width: 5px;
+	position: absolute;
+	left: 30px;
+	background-color: #F15A23;
+}
+
+.sDBoard .sD .list .weekHeader span.sld{
+	display: block;
+	height: 20px;
+	width: 20px;
+	position: absolute;
+	right: 40px;
+	background-color: #F15A23;
+	top: 15px;
+	line-height: 25px;
+	text-align: center;
+	border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	-ms-border-radius: 5px;
+	-o-border-radius: 5px;
+}
+
+.sDBoard .sD .list ul{
+	list-style: none;
+	width: 100%;
+}
+
+.sDBoard .sD .list ul li{
+	width: 100%;
+	height: 50px;
+	position: relative;
+	cursor: pointer;
+}
+
+.sDBoard .sD .list ul li span{
+	display: block;
+	font-size: 18px;
+	color: lightgray;
+	position: absolute;
+}
+
+.sDBoard .sD .list ul li span.id{
+	left: 50px;
+	top: 13px;
+	width: 24px;
+	height: 24px;
+	background-color: #F15A23;
+	text-align: center;
+	line-height: 24px;
+	border-radius: 12px;
+	-webkit-border-radius: 12px;
+	-moz-border-radius: 12px;
+	-ms-border-radius: 12px;
+	-o-border-radius: 12px;
+}
+
+.sDBoard .sD .list ul li span.content{
+	left: 94px;
+	width: 650px;
+	height: 100%;
+	text-align: left;
+	line-height: 50px;
+	font-size: 20px;
+}
+
+.sDBoard .sD .list ul li span.time{
+	right: 40px;
+	width: 50px;
+	height: 100%;
+	text-align: right;
+	line-height: 50px;
+	font-size: 15px;
+}
+
+.sDBoard .sD .list ul li:hover{
+	background: #141414;
+}
+.sDBoard .sD .list ul li:hover span{
+	color:#FF00FF;
+}

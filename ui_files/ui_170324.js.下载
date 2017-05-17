@@ -1,0 +1,273 @@
+
+$(function(){
+
+	/*表格滚动封装*/
+	;(function($,window,document,undefined){
+	    var Init=function(opt){
+	        this.defaults={
+	            "$oWrap":null,
+	            "$scrollBox":null,
+	            "$firstList":null
+	        };
+	        this.settings= $.extend({},this.defaults,opt);
+	        this.n=0;
+	        this.timer=null;
+	        this.firstiH=this.settings.$firstList.outerHeight(true);
+	    };
+
+	    Init.prototype={
+	        scrollBox:function(){
+	            var that=this;
+	            doMove();
+	            function doMove(){
+	                that.settings.$oWrap[that.timer]=setInterval(function(){
+	                    that.n++;
+	                    if(that.n>that.firstiH){
+	                        that.n=0;
+	                        that.settings.$scrollBox.append(that.settings.$scrollBox.find("tr").first());
+	                    }
+	                    that.settings.$scrollBox.css("top",-that.n);
+	                },30);
+	            }
+	            this.settings.$oWrap.hover(function(){
+	                clearInterval(that.settings.$oWrap[that.timer]);
+	            },function(){
+	                doMove();
+	            });
+	        }
+	    };
+
+    $.fn.tableScroll=function(options){
+        var scrollx=new Init(options);
+        return scrollx.scrollBox();
+    }
+	})(jQuery,window,document);
+
+	//表格滚动
+	$(".col9_table_box").tableScroll({
+	    "$oWrap":$(".col9_table_box"),
+	    "$scrollBox":$(".col9_table_box").find("table"),
+	    "$firstList":$(".col9_table_box").find("tr")
+	});
+	var mySwiper1 = new Swiper ('.swiper-container1', {
+		loop: true,
+		autoplay: 5000,
+		effect : 'fade',
+		autoplayDisableOnInteraction : false,
+		onInit: function(swiper){
+
+		},
+		//pagination : '.swiper-pagination1',
+		onSlideChangeStart: function(swiper){
+			console.log(swiper.activeIndex)
+			var cur = swiper.activeIndex;
+			var n = cur-1;
+
+			if(cur == 4){
+				n = 0;
+			}
+
+			$('.swiper-paginat span').removeClass('active')
+			$('.swiper-paginat span').eq(n).addClass('active')
+		}
+	})   
+	mySwiper1.reInit();
+
+	$('.swiper_banner_prev').on('click', function(){
+		mySwiper1.swipePrev(); 
+	});
+
+	$('.swiper_banner_next').on('click', function(){
+		mySwiper1.swipeNext(); 
+	});	
+
+	var mySwiper2 = new Swiper ('.swiper-container2', {
+		loop: true,
+		autoplay: 3000,
+		effect : 'slide',
+		autoplayDisableOnInteraction : false,
+		// prevButton:'.swiper-button-prev',
+		// nextButton:'.swiper-button-next',
+		onSlideChangeStart: function(swiper){
+			switch(swiper.activeIndex-1){
+				case 0: 
+				case 8: 
+					$('#yousi').html('优势二')
+					break;
+
+				case 1: 
+					$('#yousi').html('优势三')
+					break;
+				case 2: 
+					$('#yousi').html('优势四')
+					break;
+				case 3: 
+					$('#yousi').html('优势五')
+					break;
+				case 4: 
+					$('#yousi').html('优势六')
+					break;
+				case 5: 
+					$('#yousi').html('优势七')
+					break;
+				case 6: 
+					$('#yousi').html('优势八')
+					break;
+				case 7: 
+				case -1: 
+					$('#yousi').html('优势九')
+					break;
+
+			}
+			
+		},
+
+	})  
+
+	$('.swiper-button-prev').click(function(){
+		//mySwiper2.activeIndex--;
+		mySwiper2.swipePrev(); 
+	})
+
+	$('.swiper-button-next').click(function(){
+		//mySwiper2.activeIndex++;
+		mySwiper2.swipeNext(); 
+	})	
+
+	$('.col7_ul li').each(function(){
+		$(this).on('mouseenter', function(){
+			$('.col7_ul li').removeClass('active');
+			$(this).addClass('active')
+		})
+	})
+
+	;(function(){
+		var aClass = ["col10_j_tit", "col10_j_video", "col10_j_name", "col10_j_xz", "col10_j_desc"];
+		var timer = null;
+		var aData = [
+			{
+				tit: "北京UI1614期学员",
+				//bg: "http://zs.1000phone.net/Uploads/aphoto/2017-03-11/58c3b09de3488.jpg",
+				video: '<embed src="https://imgcache.qq.com/tencentvideo_v1/playerv3/TPout.swf?max_age=86400&v=20161117&vid=p03811h8r0f&auto=0" allowFullScreen="true" quality="high" width="594" height="456" align="middle" allowScriptAccess="always" type="application/x-shockwave-flash"></embed>',
+				name: "李同学",
+				xz: "薪资11000",
+				desc: "无缝连接，毕业便高薪入职。大三大四面临找工作的时候，回首大学生活，自己的专业没学好，其他的行业更加没有竞争力。因为口碑选择千锋，千......"
+			},
+			{
+				tit: "北京UI1609期学员",
+				//bg: "http://zs.1000phone.net/Uploads/aphoto/2017-03-17/58cb498098a6c.jpg",
+				video: '<embed src="https://imgcache.qq.com/tencentvideo_v1/playerv3/TPout.swf?max_age=86400&v=20161117&vid=m0375508wib&auto=0" allowFullScreen="true" quality="high" width="594" height="456" align="middle" allowScriptAccess="always" type="application/x-shockwave-flash"></embed>',
+				name: "樊同学",
+				xz: "薪资10000",
+				desc: "来学习之前心里很忐忑，能不能达到理想的效果。到千锋学习以后，之前迷茫的心态完全没有了，在这100多天的学习让我收获很大，有了明确的......"
+			},
+			{
+				tit: "北京UI1607期学员",
+				//bg: "http://zs.1000phone.net/Uploads/aphoto/2017-03-17/58cb49b65e8f3.jpg",
+				video: '<embed src="https://imgcache.qq.com/tencentvideo_v1/playerv3/TPout.swf?max_age=86400&v=20161117&vid=g0375h31qya&auto=0" allowFullScreen="true" quality="high" width="594" height="456" align="middle" allowScriptAccess="always" type="application/x-shockwave-flash"></embed>',
+				name: "郝同学",
+				xz: "薪资10000",
+				desc: "在很迷茫的时候，我经过了解，选择来千锋学习。对于互联网行业，我们要有先见，才能抓住先机。我找工作比较顺利，我有收到更高的offer......"
+			},
+			{
+				tit: "北京UI1607期学员",
+				//bg: "http://zs.1000phone.net/Uploads/aphoto/2017-03-17/58cb49efe3afd.jpg",
+				video: '<embed src="https://imgcache.qq.com/tencentvideo_v1/playerv3/TPout.swf?max_age=86400&v=20161117&vid=t0375l4bz22&auto=0" allowFullScreen="true" quality="high" width="594" height="456" align="middle" allowScriptAccess="always" type="application/x-shockwave-flash"></embed>',
+				name: "魏同学",
+				xz: "薪资10000",
+				desc: "跟随大学室友的脚步先后进入千锋学习，虽然大学期间学了四年的视觉设计，但是整体上看依然感觉并没有学到太多东西，去面试的过程中遇到很多......"
+			}
+		];
+
+		var curIndex = 0;
+		showData()
+		function showData(){
+			for(var i=0; i<aClass.length; i++){
+				var ele = $('.'+aClass[i]);
+				var str = aClass[i].substring(8);
+				switch(str){
+					case "tit":
+					case "name":
+					case "xz":
+					case "desc":
+						ele.html(aData[curIndex][str])
+						break;
+
+					// case "bg":
+					// 	ele.css({
+					// 		backgroundImage: "url("+aData[curIndex][str]+")"
+					// 	}) 
+					// 	break;
+
+					case "video":
+						ele.html(aData[curIndex][str])
+						break;
+				}
+			}
+		}
+
+		// timer = setInterval(function(){
+		// 	curIndex++;
+		// 	if(curIndex == aData.length){
+		// 		curIndex = 0;
+		// 	}
+		// 	showData()
+		// 	$('.col10_tab_btn a').removeClass('active')
+		// 	$('.col10_tab_btn a').eq(curIndex).addClass('active')
+		// }, 3000)
+
+		$('.col10_tab_btn a').each(function(k, v){
+			$(this).click(function(){
+				curIndex = k;
+				showData()
+				$('.col10_tab_btn a').removeClass('active')
+				$('.col10_tab_btn a').eq(curIndex).addClass('active')
+			})
+		})
+
+	})();
+
+	(function(){
+		var arr = ['col4_p06', 'col4_p07', 'col4_p08', 'col4_p09'];
+
+		for(var i=0; i<arr.length; i++){
+			(function(index){
+				$('.'+arr[index]).mouseenter(function(){
+					$('.col4_ul01 li').removeClass('active')
+					$('.col4_ul01 li').eq(index).addClass('active')
+				})
+			})(i)
+		}
+	})();
+
+	new WOW().init();
+
+	var winCX = window.innerWidth/2;
+	var winCY = window.innerHeight/2;
+
+	var aPos = [];
+	$('.col5>.warp>div').each(function(){
+		aPos.push([$(this).position().top, $(this).position().left])
+	})
+
+	$(document).on('mousemove', function(ev){
+
+		$('.col5>.warp>div').each(function(k, v){
+			$(this).css({
+				top: aPos[k][0]+(ev.pageY-$(window).scrollTop()-winCY)/50,
+				left: aPos[k][1]+(ev.pageX-winCX)/50
+			})
+		})
+	})
+
+	//侧边栏导航 改版
+	$('.base_fixed').html('<img style="position: relative; top: -36.5px;" src="http://www.mobiletrain.org/page/images/ui_170324/left-fixed.jpg">').css({
+		width: 'auto',
+		cursor: 'pointer',
+	});
+
+	$('.base_fixed').click(function(){
+		window.open('http://tb.53kf.com/code/client/10132404/1?ui')
+	})
+
+})

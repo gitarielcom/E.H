@@ -1,0 +1,45 @@
+//开班js
+
+$(function(){
+    var ckbxxBtnA=$(".ckbxx_btn").find("a");
+    var ckbxxList=$(".ckbxx_con").find(".ckbxx_list");
+
+    ckbxxBtnA.each(function(index){
+
+        $(this).mouseover(function(){
+
+            $(this).addClass("active").siblings().removeClass("active");
+
+            ckbxxList.css("display","none").eq(index).css("display","block");
+
+        });
+    });
+
+
+});
+
+//专题回顾
+$(function(){
+
+    var $zthgCon,$zthgTitle,$zthgPic,$zthgConLi;
+    $zthgCon=$(".zthg_con");
+    $zthgTitle=$zthgCon.find(".zthg_title");
+    $zthgPic=$zthgCon.find(".zthg_pic");
+    $zthgConLi=$zthgCon.find("li");
+    $zthgTitle.show();
+    $zthgPic.hide();
+    $zthgTitle.first().hide();
+    $zthgPic.first().show();
+
+    $zthgConLi.each(function(index){
+
+        $(this).mouseover(function(){
+            $zthgPic.css("display","none");
+            $zthgTitle.css("display","block");
+            $zthgPic.eq(index).css("display","block");
+            $zthgTitle.eq(index).css("display","none");
+
+        });
+    });
+
+});
